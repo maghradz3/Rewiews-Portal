@@ -5,5 +5,16 @@ const userSlice = createSlice({
     error: null,
     userInfo: [],
   },
-  reducers: {},
+  reducers: {
+    logoutUser: (state, action) => {
+      state.userInfo = null;
+      localStorage.removeItem("token");
+      localStorage.removeItem("refreshToken");
+    },
+  },
+
+  extraReducers: (builder) => {},
 });
+
+export const { logoutUser } = userSlice.actions;
+export const userReducer = userSlice.reducer;
