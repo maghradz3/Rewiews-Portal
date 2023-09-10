@@ -1,9 +1,12 @@
 import { RouteComponent } from "./Routes";
+import { Header } from "./components";
 
 function App() {
   return (
     <div>
-      <RouteComponent />
+      <Header>
+        <RouteComponent />
+      </Header>
     </div>
   );
 }
