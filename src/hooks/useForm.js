@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 export const useForm = (defaultFormValues) => {
   const [formValues, setFormValues] = useState(defaultFormValues);
@@ -20,7 +20,7 @@ export const useForm = (defaultFormValues) => {
   return {
     formValues,
     onFormChange,
-    clearForm,
+
     setFormValues,
   };
 };

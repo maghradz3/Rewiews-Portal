@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const axiosInstance = axios.create({
-  baseURL: "localhost:5000",
+  baseURL: "https://reviews-portal-back.onrender.com",
 });
 
 axiosInstance.interceptors.request.use((req) => {
@@ -23,7 +23,7 @@ axiosInstance.interceptors.response.use(
     ) {
       const refreshToken = localStorage.getItem("refreshToken");
       axios
-        .post("localhost:5000", {
+        .post("https://reviews-portal-back.onrender.com", {
           refresh_token: refreshToken,
         })
         .then(({ data }) => {

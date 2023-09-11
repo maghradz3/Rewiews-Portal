@@ -5,10 +5,12 @@ export const authenticatedUser = createAsyncThunk(
   "user/authenticatedUser",
   async ({ formValues, isLogin }, { rejectWithValue }) => {
     try {
-      const route = `/users/${isLogin ? "login" : "register"}`;
+      const route = `/user/${isLogin ? "login" : "register"}`;
       const { data } = await axiosInstance.post(route, formValues);
       localStorage.setItem("token", data.token);
       localStorage.setItem("refreshToken", data.refreshToken);
+      console.log(data.user);
+      return data;
     } catch (error) {
       return rejectWithValue(error?.response?.data);
     }
@@ -20,7 +22,7 @@ const userSlice = createSlice({
   initialState: {
     loading: false,
     error: null,
-    userInfo: [],
+    userInfo: null,
   },
   reducers: {
     logoutUser: (state, action) => {

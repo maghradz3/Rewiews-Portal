@@ -1,10 +1,11 @@
 import { Box } from "@mui/material";
 import React from "react";
-import { Button, Input } from "../../../atoms";
+import { Button, Input } from "../../atoms";
 import { generateRegisterFormValues } from "./generateRegisterFormValues";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
-import { authenticatedUser } from "../../../redux/slice";
+import { authenticatedUser } from "../../redux/slice";
+import { useForm } from "../../hooks";
 
 export const RegisterForm = () => {
   const { formValues: registerFormValues, onFormChange } = useForm(
@@ -19,13 +20,14 @@ export const RegisterForm = () => {
     const lastName = registerFormValues.lastName.value;
     const email = registerFormValues.email.value;
     const password = registerFormValues.password.value;
+    console.log(firstName, lastName, email, password);
     dispatch(
       authenticatedUser({
         formValues: { firstName, lastName, email, password },
         isLogin: false,
       })
     )
-      .unWrap()
+      .unwrap()
       .then(() => {
         navigate("/");
       })
@@ -35,7 +37,15 @@ export const RegisterForm = () => {
   };
 
   return (
-    <Box>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        gap: "10px",
+      }}
+    >
       <Input
         name="firstName"
         label="firstName"
