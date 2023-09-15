@@ -36,6 +36,10 @@ export const RegisterForm = () => {
       });
   };
 
+  const googleHandler = () => {
+    window.open("http://localhost:5000/auth/google", "_self");
+  };
+
   return (
     <Box
       sx={{
@@ -75,6 +79,10 @@ export const RegisterForm = () => {
         onChange={onFormChange}
       />
       <Button onClick={onSubmit}>Register</Button>
+      <div>
+        <Button onClick={googleHandler}>Login With Google</Button>
+        <a href="/auth/facebook">Login with Facebook</a>
+      </div>
     </Box>
   );
 };
