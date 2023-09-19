@@ -21,18 +21,18 @@ export const generateRegisterFormValues = () => {
       required: true,
       error: "",
       validateInput: (email) =>
-        email.includes("@gmail.com")
+        email.includes("@")
           ? null
-          : " email is not valid. Please finish with @gmail.com",
+          : ` email is not valid. Your email have to include "@" symbol `,
     },
     password: {
       value: "",
       required: true,
       error: "",
       validateInput: (password) =>
-        password.length > 6
+        password.length > 3
           ? null
-          : " password should have at least 6 character",
+          : " password should have at least 3 character",
     },
   };
 };

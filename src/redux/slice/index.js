@@ -1,2 +1,2 @@
 export { userReducer, authenticatedUser, logoutUser } from "./userSlice";
-export { reviewsReducer, uploadReview } from "./reviewsSlice";
+export { reviewsReducer, uploadReview, getAllReviews } from "./reviewsSlice";

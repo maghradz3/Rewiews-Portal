@@ -13,6 +13,7 @@ import { useNavigate } from "react-router";
 import { useUser } from "../../hooks";
 import { Button } from "../../atoms";
 import { logoutUser } from "../../redux/slice";
+import { getUserInitials } from "../../helpers";
 const StyledBox = styled(Box)(() => ({
   display: "flex",
   flexDirection: "column",
@@ -30,7 +31,13 @@ export const UserIcon = () => {
   return (
     <Box>
       <IconButton onClick={(e) => setAnchor(e.currentTarget)}>
-        <Avatar>PH</Avatar>
+        <Avatar>
+          {userInfo?.profilePicture ? (
+            <img className="w-full h-full" src={userInfo?.profilePicture} />
+          ) : (
+            getUserInitials(userInfo)
+          )}
+        </Avatar>
       </IconButton>
       <Menu
         anchorEl={anchor}

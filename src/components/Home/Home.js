@@ -1,12 +1,28 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { getAllReviews } from "../../redux/slice";
+import { useReview } from "../../hooks";
+import { Button } from "../../atoms";
+import { AllReviewItem } from "./AllReviewItem";
 
 export const Home = () => {
+  const dispatch = useDispatch();
+
+  const { reviews } = useReview();
+  console.log(reviews);
+
+  useEffect(() => {
+    dispatch(getAllReviews());
+  }, []);
+
+  const ReviewsHandler = () => {
+    dispatch(getAllReviews());
+  };
   return (
-    <div className="container mx-auto px-4">
-      {" "}
-      <h1 className="text-3xl text-white font-semibold mt-4 mb-8">
-        Recent Reviews
-      </h1>
+    <div className="container mx-auto  flex justify-center gap-[50px] flex-wrap border-solid border-2 border-rose  ">
+      {reviews.map((review) => (
+        <AllReviewItem key={review._id} review={review} />
+      ))}
     </div>
   );
 };

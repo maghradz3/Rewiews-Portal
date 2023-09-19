@@ -10,7 +10,7 @@ export const RouteComponent = () => {
       <Route path="/" element={<HomePage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
-      {userInfo && <Route path="/review" element={<ReviewPage />} />}
+      {userInfo && <Route path="/reviewUpload" element={<ReviewPage />} />}
     </Routes>
   );
 };

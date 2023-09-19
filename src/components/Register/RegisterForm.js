@@ -1,16 +1,18 @@
 import { Box } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import { Button, Input } from "../../atoms";
 import { generateRegisterFormValues } from "./generateRegisterFormValues";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import { authenticatedUser } from "../../redux/slice";
 import { useForm } from "../../hooks";
+import FileBase64 from "react-file-base64";
 
 export const RegisterForm = () => {
   const { formValues: registerFormValues, onFormChange } = useForm(
     generateRegisterFormValues()
   );
+  const [image, setImage] = useState("");
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -20,10 +22,10 @@ export const RegisterForm = () => {
     const lastName = registerFormValues.lastName.value;
     const email = registerFormValues.email.value;
     const password = registerFormValues.password.value;
-    console.log(firstName, lastName, email, password);
+    console.log(firstName, lastName, email, password, image);
     dispatch(
       authenticatedUser({
-        formValues: { firstName, lastName, email, password },
+        formValues: { firstName, lastName, email, password, image },
         isLogin: false,
       })
     )
@@ -34,10 +36,6 @@ export const RegisterForm = () => {
       .catch((err) => {
         console.log(err);
       });
-  };
-
-  const googleHandler = () => {
-    window.open("http://localhost:5000/auth/google", "_self");
   };
 
   return (
@@ -78,11 +76,14 @@ export const RegisterForm = () => {
         error={registerFormValues.password.error}
         onChange={onFormChange}
       />
+      <FileBase64
+        type="file"
+        multiple={false}
+        onDone={({ base64 }) => {
+          setImage(base64);
+        }}
+      />
       <Button onClick={onSubmit}>Register</Button>
-      <div>
-        <Button onClick={googleHandler}>Login With Google</Button>
-        <a href="/auth/facebook">Login with Facebook</a>
-      </div>
     </Box>
   );
 };

@@ -53,5 +53,14 @@ export const generateReviewsFormValues = () => {
           ? null
           : "Rating should be between 0 and 10.",
     },
+    textarrea: {
+      value: "",
+      required: true,
+      error: "",
+      validateInput: (textarrea) =>
+        textarrea.length > 10
+          ? null
+          : "Textarrea should have at least 10 characters.",
+    },
   };
 };

@@ -7,6 +7,7 @@ import { useForm } from "../../hooks";
 import { uploadReview } from "../../redux/slice";
 import { useUser } from "../../hooks";
 import FileBase64 from "react-file-base64";
+import { TextareaAutosize } from "@mui/material";
 
 export const AddReviewForm = () => {
   const [image, setImage] = useState("");
@@ -16,15 +17,6 @@ export const AddReviewForm = () => {
     setFormValues,
   } = useForm(generateReviewsFormValues());
   const { userInfo } = useUser();
-  const onImageChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setFormValues((prevValues) => ({
-        ...prevValues,
-        image: { value: file },
-      }));
-    }
-  };
 
   const dispatch = useDispatch();
 
@@ -35,6 +27,7 @@ export const AddReviewForm = () => {
     const category = reviewFormValues.category.value;
     const tags = reviewFormValues.tags.value;
     const rating = reviewFormValues.rating.value;
+    const textarrea = reviewFormValues.textarrea.value;
 
     console.log(title, artworkName, content, tags, rating, image);
 
@@ -47,6 +40,7 @@ export const AddReviewForm = () => {
           content,
           tags,
           rating,
+          textarrea,
           image,
           author: userInfo._id,
         },
@@ -126,13 +120,24 @@ export const AddReviewForm = () => {
         min="0"
         max="10"
         value={reviewFormValues.rating.value}
+        error={reviewFormValues.rating.error}
         onChange={onFormChange}
       />
+      <div className="flex flex-col justify-between gap-2">
+        <label className="text-white" name="textarrea">
+          Deep Description
+        </label>
+        <TextareaAutosize
+          name="textarrea"
+          value={reviewFormValues.textarrea.value}
+          onChange={onFormChange}
+          minRows={3}
+        />
+      </div>
       <FileBase64
         type="file"
         multiple={false}
         onDone={({ base64 }) => {
-          console.log(base64);
           setImage(base64);
         }}
       />
