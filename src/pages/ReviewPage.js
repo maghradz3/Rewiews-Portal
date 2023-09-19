@@ -1,5 +1,10 @@
 import React from "react";
+import { AddReviewForm } from "../components/Reviews";
 
 export const ReviewPage = () => {
-  return <div>ReviewPage</div>;
+  return (
+    <div>
+      <AddReviewForm />
+    </div>
+  );
 };

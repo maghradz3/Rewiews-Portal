@@ -1,4 +1,4 @@
-export const generateReviewFormValues = () => {
+export const generateReviewsFormValues = () => {
   return {
     title: {
       value: "",
@@ -45,7 +45,7 @@ export const generateReviewFormValues = () => {
       error: "",
     },
     rating: {
-      value: 5,
+      value: "",
       required: false,
       error: "",
       validateInput: (rating) =>

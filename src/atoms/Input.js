@@ -1,5 +1,12 @@
-import { TextField } from "@mui/material";
+// import styled from "@emotion/styled";
+import { TextField, styled } from "@mui/material";
 import React from "react";
+
+const StyledTextField = styled(TextField)(() => ({
+  "& .MuiInputBase-input": {
+    color: "white",
+  },
+}));
 
 export const Input = ({
   type = "text",
@@ -10,7 +17,7 @@ export const Input = ({
   value,
 }) => {
   return (
-    <TextField
+    <StyledTextField
       type={type}
       name={name}
       label={label}
@@ -18,7 +25,7 @@ export const Input = ({
       error={Boolean(error)}
       value={value}
       helperText={error}
-      InputLabelProps={{ style: { color: "white" } }}
+      InputLabelProps={{ sx: { color: "white" } }}
     />
   );
 };
