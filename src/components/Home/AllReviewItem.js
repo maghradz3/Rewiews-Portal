@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState } from "react";
 import { styled } from "@mui/material/styles";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
@@ -15,7 +16,17 @@ import ShareIcon from "@mui/icons-material/Share";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { getAuthorInitials } from "../../helpers";
-import { useUser } from "../../hooks";
+import { Menu, MenuItem, Button, Box } from "@mui/material";
+import { useReview, useUser } from "../../hooks";
+import { useDispatch } from "react-redux";
+import { deleteReview } from "../../redux/slice";
+
+import { AiFillStar } from "react-icons/ai";
+import { addLikeToReview, addDisLikeToReview } from "../../redux/slice";
+import { IoHeartDislike } from "react-icons/io5";
+import { Input } from "../../atoms";
+import { Comment } from "../Comments";
+import { useNavigate } from "react-router";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -28,12 +39,37 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
+const StyledBox = styled(Box)(() => ({
+  display: "flex",
+  flexDirection: "column",
+
+  borderRadius: 10,
+}));
+
 export const AllReviewItem = ({ review }) => {
-  const [expanded, setExpanded] = React.useState(false);
+  const { title } = review;
+  const [expanded, setExpanded] = useState(false);
+  const [anchor, setAnchor] = useState(null);
+  const [isLiked, setIsLiked] = useState(true);
   const { userInfo } = useUser();
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
+  };
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  console.log(review._id);
+
+  const deleteReviewHandler = () => {
+    dispatch(deleteReview(review._id));
+  };
+
+  const addLikeHandler = () => {
+    dispatch(addLikeToReview(review._id));
+  };
+
+  const addDisLikeHandler = () => {
+    dispatch(addDisLikeToReview(review._id));
   };
 
   return (
@@ -52,9 +88,38 @@ export const AllReviewItem = ({ review }) => {
           </Avatar>
         }
         action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
-          </IconButton>
+          <>
+            <IconButton
+              onClick={(e) => setAnchor(e.currentTarget)}
+              aria-label="settings"
+            >
+              <MoreVertIcon />
+            </IconButton>
+            <Menu
+              anchorEl={anchor}
+              open={Boolean(anchor)}
+              onClose={() => setAnchor(null)}
+            >
+              <StyledBox>
+                {userInfo._id === review?.author?._id && (
+                  <>
+                    <MenuItem>
+                      <Button onClick={deleteReviewHandler}>Delete</Button>
+                    </MenuItem>
+                    <MenuItem>
+                      <Button
+                        onClick={() => {
+                          navigate("/:title/edit");
+                        }}
+                      >
+                        Edit
+                      </Button>
+                    </MenuItem>
+                  </>
+                )}
+              </StyledBox>
+            </Menu>
+          </>
         }
         title={review.title}
         subheader={review.artworkName}
@@ -70,11 +135,24 @@ export const AllReviewItem = ({ review }) => {
           {review.content}
         </Typography>
       </CardContent>
-      <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
-        </IconButton>
-
+      <CardActions className="flex justify-between">
+        <Box className="flex justify-between gap-[10px] align-center border-solid border-red-700 border-2">
+          <IconButton aria-label="add to favorites" onClick={addLikeHandler}>
+            <FavoriteIcon
+              sx={
+                review?.likes[0]?.user === userInfo._id ? { color: "red" } : {}
+              }
+            />
+          </IconButton>
+          <h1>{review.likes.length}</h1>
+          <IconButton aria-label="add to favorites" onClick={addDisLikeHandler}>
+            <IoHeartDislike />
+          </IconButton>
+        </Box>
+        <h1 className="flex justify-between cursor-pointer ">
+          <AiFillStar className="text-2xl text-orange-500  " />
+          {review.rating}/10
+        </h1>
         <ExpandMore
           expand={expanded}
           onClick={handleExpandClick}
@@ -85,9 +163,18 @@ export const AllReviewItem = ({ review }) => {
         </ExpandMore>
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent>
-          <Typography paragraph>More About Content:</Typography>
-          <Typography paragraph>{review.textarrea}</Typography>
+        <CardContent className="flex flex-col">
+          <Typography className="self-center" paragraph>
+            Comments
+          </Typography>
+          {/* <input
+            class="placeholder:italic placeholder:text-slate-400 block bg-white w-full border border-slate-300 rounded-md py-2 pl-9 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm"
+            placeholder="Add You comment Here"
+            type="text"
+            name="search"
+          />
+          <Button className="self-end">Add Comment</Button> */}
+          <Comment reviewId={review._id} comments={review.comments} />
         </CardContent>
       </Collapse>
     </Card>

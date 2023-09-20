@@ -27,6 +27,81 @@ export const getAllReviews = createAsyncThunk(
   }
 );
 
+export const deleteReview = createAsyncThunk(
+  "reviews/deleteReview",
+  async (userId, { rejectWithValue, dispatch }) => {
+    try {
+      const { data } = await axiosInstance.delete(`/review/${userId}`);
+      dispatch(getAllReviews());
+      return data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
+export const addLikeToReview = createAsyncThunk(
+  "reviews/addLikeToReview",
+  async (reviewId, { rejectWithValue, dispatch }) => {
+    try {
+      const { data } = await axiosInstance.post(`/review/${reviewId}/likes/`);
+
+      console.log(data);
+      dispatch(getAllReviews());
+      return data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
+export const addDisLikeToReview = createAsyncThunk(
+  "reviews/addDisLikeToReview",
+  async (reviewId, { rejectWithValue, dispatch }) => {
+    try {
+      const { data } = await axiosInstance.delete(`/review/${reviewId}/likes/`);
+
+      console.log(data);
+      dispatch(getAllReviews());
+      return data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
+export const addCommentToReview = createAsyncThunk(
+  "reviews/addCommentToReview",
+  async ({ inputValue, reviewId }, { rejectWithValue, dispatch }) => {
+    try {
+      const { data } = await axiosInstance.post(
+        `/review/${reviewId}/comments/`,
+        { text: inputValue }
+      );
+      console.log(data);
+      dispatch(getAllReviews());
+      return data;
+    } catch (error) {}
+  }
+);
+
+export const deleteCommentToReview = createAsyncThunk(
+  "reviews/deleteCommentToReview",
+  async ({ commentId, reviewId }, { rejectWithValue, dispatch }) => {
+    try {
+      const { data } = await axiosInstance.delete(
+        `/review/${reviewId}/comments/${commentId}`
+      );
+      console.log(data);
+      dispatch(getAllReviews());
+      return data;
+    } catch (error) {
+      console.error(error);
+      return rejectWithValue(error);
+    }
+  }
+);
+
 const reviewsSlice = createSlice({
   name: "reviews",
   initialState: {
@@ -54,6 +129,14 @@ const reviewsSlice = createSlice({
       state.reviews = action.payload;
     });
     builder.addCase(getAllReviews.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    });
+    builder.addCase(deleteReview.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    });
+    builder.addCase(deleteCommentToReview.rejected, (state, action) => {
       state.loading = false;
       state.error = action.payload;
     });

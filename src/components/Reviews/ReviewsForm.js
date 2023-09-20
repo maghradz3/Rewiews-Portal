@@ -8,6 +8,7 @@ import { uploadReview } from "../../redux/slice";
 import { useUser } from "../../hooks";
 import FileBase64 from "react-file-base64";
 import { TextareaAutosize } from "@mui/material";
+import { useNavigate } from "react-router";
 
 export const AddReviewForm = () => {
   const [image, setImage] = useState("");
@@ -19,6 +20,7 @@ export const AddReviewForm = () => {
   const { userInfo } = useUser();
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const onSubmit = () => {
     const title = reviewFormValues.title.value;
@@ -48,6 +50,7 @@ export const AddReviewForm = () => {
     )
       .unwrap()
       .then(() => {
+        navigate("/");
         console.log("Review Added");
       })
       .catch((err) => {

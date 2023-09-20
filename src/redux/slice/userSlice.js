@@ -17,12 +17,26 @@ export const authenticatedUser = createAsyncThunk(
   }
 );
 
+export const getAllUsers = createAsyncThunk(
+  "user/getAllUsers",
+  async (_, { rejectWithValue }) => {
+    try {
+      const { data } = await axiosInstance.get("/user/users");
+      console.log(data);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error?.response?.data);
+    }
+  }
+);
+
 const userSlice = createSlice({
   name: "user",
   initialState: {
     loading: false,
     error: null,
     userInfo: null,
+    users: [],
   },
   reducers: {
     logoutUser: (state, action) => {
@@ -41,6 +55,17 @@ const userSlice = createSlice({
       state.userInfo = action.payload.user;
     });
     builder.addCase(authenticatedUser.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    });
+    builder.addCase(getAllUsers.pending, (state, action) => {
+      state.loading = true;
+    });
+    builder.addCase(getAllUsers.fulfilled, (state, action) => {
+      state.loading = false;
+      state.users = action.payload;
+    });
+    builder.addCase(getAllUsers.rejected, (state, action) => {
       state.loading = false;
       state.error = action.payload;
     });
