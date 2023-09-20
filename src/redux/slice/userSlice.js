@@ -30,6 +30,19 @@ export const getAllUsers = createAsyncThunk(
   }
 );
 
+export const deleteUser = createAsyncThunk(
+  "user/deleteUser",
+  async (id, { rejectWithValue, dispatch }) => {
+    try {
+      const { data } = await axiosInstance.delete(`/user/users/${id}`);
+      dispatch(getAllUsers());
+      return data;
+    } catch (error) {
+      rejectWithValue(error?.response?.data);
+    }
+  }
+);
+
 const userSlice = createSlice({
   name: "user",
   initialState: {

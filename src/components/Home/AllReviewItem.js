@@ -27,6 +27,7 @@ import { IoHeartDislike } from "react-icons/io5";
 import { Input } from "../../atoms";
 import { Comment } from "../Comments";
 import { useNavigate } from "react-router";
+import { isUserAdmin } from "../../helpers";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -72,6 +73,8 @@ export const AllReviewItem = ({ review }) => {
     dispatch(addDisLikeToReview(review._id));
   };
 
+  const admin = isUserAdmin(userInfo);
+
   return (
     <Card className=" w-1/4  ">
       <CardHeader
@@ -101,23 +104,23 @@ export const AllReviewItem = ({ review }) => {
               onClose={() => setAnchor(null)}
             >
               <StyledBox>
-                {userInfo._id === review?.author?._id && (
-                  <>
-                    <MenuItem>
-                      <Button onClick={deleteReviewHandler}>Delete</Button>
-                    </MenuItem>
-                    <MenuItem>
-                      <Button
-                        onClick={() => {
-                          dispatch(setSelectedReview(review));
-                          navigate(`/${title}/edit`);
-                        }}
-                      >
-                        Edit
-                      </Button>
-                    </MenuItem>
-                  </>
-                )}
+                {/* {userInfo._id === review?.author?._id && ( */}
+                <>
+                  <MenuItem>
+                    <Button onClick={deleteReviewHandler}>Delete</Button>
+                  </MenuItem>
+                  <MenuItem>
+                    <Button
+                      onClick={() => {
+                        dispatch(setSelectedReview(review));
+                        navigate(`/${title}/edit`);
+                      }}
+                    >
+                      Edit
+                    </Button>
+                  </MenuItem>
+                </>
+                {/* )} */}
               </StyledBox>
             </Menu>
           </>
@@ -141,7 +144,7 @@ export const AllReviewItem = ({ review }) => {
           <IconButton aria-label="add to favorites" onClick={addLikeHandler}>
             <FavoriteIcon
               sx={
-                review?.likes[0]?.user === userInfo._id ? { color: "red" } : {}
+                review?.likes[0]?.user === userInfo?._id ? { color: "red" } : {}
               }
             />
           </IconButton>

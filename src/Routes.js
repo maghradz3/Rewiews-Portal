@@ -6,11 +6,14 @@ import {
   LoginPage,
   ReviewPage,
   AuthorReviewsPage,
+  AdminPanelPage,
 } from "./pages";
 import { useUser } from "./hooks";
+import { isUserAdmin } from "./helpers";
 
 export const RouteComponent = () => {
   const { userInfo } = useUser();
+  const admin = isUserAdmin(userInfo);
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
@@ -21,6 +24,7 @@ export const RouteComponent = () => {
       {userInfo && (
         <Route path="/authorReviews" element={<AuthorReviewsPage />} />
       )}
+      {admin && <Route path="/adminPanel" element={<AdminPanelPage />} />}
     </Routes>
   );
 };

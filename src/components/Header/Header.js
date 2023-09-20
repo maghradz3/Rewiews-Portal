@@ -18,16 +18,21 @@ export const Header = () => {
     navigate("/authorReviews");
   };
 
+  const moveToAdminPanelHandler = () => {
+    navigate("/adminPanel");
+  };
+
   return (
     <AppBar sx={{ backgroundColor: "black" }}>
       <Container maxWidth="xl">
         <Toolbar className="flex justify-between ">
-          <Box sx={{ flexGrow: 0 }}>
-            <UserIcon />
-          </Box>
           <Box>
             <Button onClick={moveToAuthorReviewsHandler}>My Reviews</Button>
             <Button onClick={moveToUploadHandler}>Write a Review</Button>
+            <Button onClick={moveToAdminPanelHandler}>Admin Panel</Button>
+          </Box>
+          <Box sx={{ flexGrow: 0 }}>
+            <UserIcon />
           </Box>
         </Toolbar>
       </Container>

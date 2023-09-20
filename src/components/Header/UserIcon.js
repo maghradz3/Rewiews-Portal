@@ -53,18 +53,26 @@ export const UserIcon = () => {
               <MenuItem>
                 <Button onClick={() => navigate("/register")}>Sign Up</Button>
               </MenuItem>
+              <MenuItem>
+                <Button onClick={() => navigate("/")}> Menu</Button>
+              </MenuItem>
             </>
           ) : (
-            <MenuItem>
-              <Button
-                onClick={() => {
-                  dispatch(logoutUser());
-                  navigate("/register");
-                }}
-              >
-                Log Out
-              </Button>
-            </MenuItem>
+            <>
+              <MenuItem>
+                <Button onClick={() => navigate("/")}> Menu</Button>
+              </MenuItem>
+              <MenuItem>
+                <Button
+                  onClick={() => {
+                    dispatch(logoutUser());
+                    navigate("/register");
+                  }}
+                >
+                  Log Out
+                </Button>
+              </MenuItem>
+            </>
           )}
         </StyledBox>
       </Menu>

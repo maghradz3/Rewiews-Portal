@@ -3,3 +3,4 @@ export { LoginPage } from "./LoginPage";
 export { RegisterPage } from "./RegisterPage";
 export { ReviewPage } from "./ReviewPage";
 export { AuthorReviewsPage } from "./AuthorReviewsPage";
+export { AdminPanelPage } from "./AdminPanelPage";

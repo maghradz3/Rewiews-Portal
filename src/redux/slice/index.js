@@ -3,6 +3,7 @@ export {
   authenticatedUser,
   logoutUser,
   getAllUsers,
+  deleteUser,
 } from "./userSlice";
 export {
   reviewsReducer,
