@@ -3,9 +3,11 @@ import { axiosInstance } from "../../helpers";
 
 export const uploadReview = createAsyncThunk(
   "reviews/uploadReview",
-  async ({ formValues }, { rejectWithValue }) => {
+  async ({ formValues, reviewId }, { rejectWithValue }) => {
     try {
-      const { data } = await axiosInstance.post("/review/upload", formValues);
+      const method = reviewId ? "put" : "post";
+      const url = reviewId ? `/review/${reviewId}` : "/review/upload";
+      const { data } = await axiosInstance[method](url, formValues);
 
       return data;
     } catch (error) {
@@ -107,9 +109,14 @@ const reviewsSlice = createSlice({
   initialState: {
     loading: false,
     error: null,
+    selectedReview: null,
     reviews: [],
   },
-  reducers: {},
+  reducers: {
+    setSelectedReview: (state, action) => {
+      state.selectedReview = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(uploadReview.pending, (state, action) => {
       state.loading = true;
@@ -144,3 +151,4 @@ const reviewsSlice = createSlice({
 });
 
 export const reviewsReducer = reviewsSlice.reducer;
+export const { setSelectedReview } = reviewsSlice.actions;

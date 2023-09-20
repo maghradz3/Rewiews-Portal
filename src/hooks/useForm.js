@@ -17,10 +17,14 @@ export const useForm = (defaultFormValues) => {
     });
   };
 
+  const clearForm = () => {
+    setFormValues(defaultFormValues);
+  };
+
   return {
     formValues,
     onFormChange,
-
+    clearForm,
     setFormValues,
   };
 };

@@ -19,7 +19,7 @@ import { getAuthorInitials } from "../../helpers";
 import { Menu, MenuItem, Button, Box } from "@mui/material";
 import { useReview, useUser } from "../../hooks";
 import { useDispatch } from "react-redux";
-import { deleteReview } from "../../redux/slice";
+import { deleteReview, setSelectedReview } from "../../redux/slice";
 
 import { AiFillStar } from "react-icons/ai";
 import { addLikeToReview, addDisLikeToReview } from "../../redux/slice";
@@ -109,7 +109,8 @@ export const AllReviewItem = ({ review }) => {
                     <MenuItem>
                       <Button
                         onClick={() => {
-                          navigate("/:title/edit");
+                          dispatch(setSelectedReview(review));
+                          navigate(`/${title}/edit`);
                         }}
                       >
                         Edit

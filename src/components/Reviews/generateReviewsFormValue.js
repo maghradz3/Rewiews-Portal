@@ -1,14 +1,14 @@
-export const generateReviewsFormValues = () => {
+export const generateReviewsFormValues = (selectedReview = {}) => {
   return {
     title: {
-      value: "",
+      value: selectedReview?.title || "",
       required: true,
       error: "",
       validateInput: (title) =>
         title.length > 3 ? null : "Title should have at least 3 characters.",
     },
     pieceName: {
-      value: "",
+      value: selectedReview?.artworkName || "",
       required: true,
       error: "",
       validateInput: (pieceName) =>
@@ -17,7 +17,7 @@ export const generateReviewsFormValues = () => {
           : "Piece name should have at least 3 characters.",
     },
     category: {
-      value: "",
+      value: selectedReview?.category || "",
       required: true,
       error: "",
       validateInput: (category) =>
@@ -26,12 +26,12 @@ export const generateReviewsFormValues = () => {
           : "Category is not valid.",
     },
     tags: {
-      value: [],
+      value: selectedReview?.tags || [],
       required: false,
       error: "",
     },
     content: {
-      value: "",
+      value: selectedReview?.content || "",
       required: true,
       error: "",
       validateInput: (content) =>
@@ -40,12 +40,12 @@ export const generateReviewsFormValues = () => {
           : "Content should have at least 10 characters.",
     },
     image: {
-      value: null,
+      value: selectedReview?.image || null,
       required: false,
       error: "",
     },
     rating: {
-      value: "",
+      value: selectedReview?.rating || "",
       required: false,
       error: "",
       validateInput: (rating) =>
@@ -54,7 +54,7 @@ export const generateReviewsFormValues = () => {
           : "Rating should be between 0 and 10.",
     },
     textarrea: {
-      value: "",
+      value: selectedReview?.textarrea || "",
       required: true,
       error: "",
       validateInput: (textarrea) =>

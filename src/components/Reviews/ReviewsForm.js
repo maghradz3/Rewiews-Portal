@@ -5,22 +5,32 @@ import { generateReviewsFormValues } from "./generateReviewsFormValue";
 import { useDispatch } from "react-redux";
 import { useForm } from "../../hooks";
 import { uploadReview } from "../../redux/slice";
-import { useUser } from "../../hooks";
+import { useUser, useReview } from "../../hooks";
 import FileBase64 from "react-file-base64";
 import { TextareaAutosize } from "@mui/material";
 import { useNavigate } from "react-router";
+import { useEffect } from "react";
 
 export const AddReviewForm = () => {
   const [image, setImage] = useState("");
   const {
     formValues: reviewFormValues,
     onFormChange,
-    setFormValues,
+    setFormValues: setReviewFormValues,
   } = useForm(generateReviewsFormValues());
   const { userInfo } = useUser();
+  const { selectedReview } = useReview();
+  console.log(selectedReview);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (selectedReview) {
+      setReviewFormValues(generateReviewsFormValues(selectedReview));
+      setImage(selectedReview.image);
+    }
+  }, [selectedReview]);
 
   const onSubmit = () => {
     const title = reviewFormValues.title.value;
@@ -46,6 +56,7 @@ export const AddReviewForm = () => {
           image,
           author: userInfo._id,
         },
+        reviewId: selectedReview?._id,
       })
     )
       .unwrap()

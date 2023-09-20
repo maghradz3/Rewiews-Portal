@@ -6,6 +6,7 @@ export {
 } from "./userSlice";
 export {
   reviewsReducer,
+  setSelectedReview,
   uploadReview,
   getAllReviews,
   deleteReview,

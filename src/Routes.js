@@ -17,7 +17,7 @@ export const RouteComponent = () => {
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
       {userInfo && <Route path="/reviewUpload" element={<ReviewPage />} />}
-      {userInfo && <Route path="/:title/new" element={<ReviewPage />} />}
+      {userInfo && <Route path="/:title/edit" element={<ReviewPage />} />}
       {userInfo && (
         <Route path="/authorReviews" element={<AuthorReviewsPage />} />
       )}
