@@ -29,6 +29,18 @@ export const getAllReviews = createAsyncThunk(
   }
 );
 
+export const getSingleREview = createAsyncThunk(
+  "reviews/getSingleReview",
+  async (reviewId, { rejectWithValue }) => {
+    try {
+      const { data } = await axiosInstance.get(`/review/${reviewId}`);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error?.response?.data);
+    }
+  }
+);
+
 export const deleteReview = createAsyncThunk(
   "reviews/deleteReview",
   async (userId, { rejectWithValue, dispatch }) => {
@@ -110,6 +122,7 @@ const reviewsSlice = createSlice({
     loading: false,
     error: null,
     selectedReview: null,
+    singleReview: null,
     reviews: [],
   },
   reducers: {
@@ -136,6 +149,17 @@ const reviewsSlice = createSlice({
       state.reviews = action.payload;
     });
     builder.addCase(getAllReviews.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    });
+    builder.addCase(getSingleREview.pending, (state, action) => {
+      state.loading = true;
+    });
+    builder.addCase(getSingleREview.fulfilled, (state, action) => {
+      state.loading = false;
+      state.singleReview = action.payload;
+    });
+    builder.addCase(getSingleREview.rejected, (state, action) => {
       state.loading = false;
       state.error = action.payload;
     });

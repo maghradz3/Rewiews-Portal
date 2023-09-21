@@ -10,6 +10,7 @@ export {
   setSelectedReview,
   uploadReview,
   getAllReviews,
+  getSingleREview,
   deleteReview,
   addLikeToReview,
   addDisLikeToReview,

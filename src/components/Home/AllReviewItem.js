@@ -19,7 +19,11 @@ import { getAuthorInitials } from "../../helpers";
 import { Menu, MenuItem, Button, Box } from "@mui/material";
 import { useReview, useUser } from "../../hooks";
 import { useDispatch } from "react-redux";
-import { deleteReview, setSelectedReview } from "../../redux/slice";
+import {
+  deleteReview,
+  getSingleREview,
+  setSelectedReview,
+} from "../../redux/slice";
 
 import { AiFillStar } from "react-icons/ai";
 import { addLikeToReview, addDisLikeToReview } from "../../redux/slice";
@@ -129,7 +133,11 @@ export const AllReviewItem = ({ review }) => {
         subheader={review.artworkName}
       />
       <CardMedia
-        className="h-[300px] object-cover w-full object-center"
+        onClick={() => {
+          dispatch(getSingleREview(review._id));
+          navigate(`/singleReview/${review._id}`);
+        }}
+        className="h-[300px] object-cover w-full object-center cursor-pointer"
         component="img"
         image={review.image}
         alt="Paella dish"
