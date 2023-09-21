@@ -1,9 +1,15 @@
 import React from "react";
 import { useReview } from "../../hooks";
+import { Comment } from "../Comments";
 
 export const SingleReview = () => {
   const { singleReview } = useReview();
   console.log(singleReview);
+
+  const authorInits =
+    singleReview?.author?.firstName.toUpperCase().charAt(0) +
+    singleReview?.author?.lastName.toUpperCase().charAt(0);
+  console.log(authorInits);
 
   return (
     <div className="bg-gray-100 min-h-screen p-4 md:p-8">
@@ -30,7 +36,9 @@ export const SingleReview = () => {
           </div>
         )}
         <div className="flex items-center mb-4">
-          <img className="w-10 h-10 rounded-full mr-4" />
+          <div className="w-10 h-10 rounded-full mr-4">
+            <h1 className="text-black-500 text-3xl">{authorInits}</h1>{" "}
+          </div>
           <div>
             <p className="font-semibold">{singleReview?.author.firstName}</p>
             <p className="text-sm text-gray-500">
@@ -51,20 +59,10 @@ export const SingleReview = () => {
             </span>
           ))}
         </div>
-        {singleReview?.comments && (
-          <div>
-            <h2 className="text-2xl font-bold mb-4">Comments</h2>
-            {singleReview?.comments.map((comment, index) => (
-              <div key={index} className="mb-4 border-b border-gray-200 pb-4">
-                <div className="flex items-center mb-2">
-                  <img className="w-8 h-8 rounded-full mr-3" />
-                  <p className="font-semibold">{comment.text}</p>
-                </div>
-                <p className="text-gray-600">{comment.text}</p>
-              </div>
-            ))}
-          </div>
-        )}
+        <Comment
+          reviewId={singleReview?._id}
+          comments={singleReview?.comments}
+        />
       </div>
     </div>
   );

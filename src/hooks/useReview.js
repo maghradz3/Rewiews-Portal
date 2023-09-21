@@ -5,9 +5,13 @@ export const useReview = () => {
   const reviewError = useSelector((state) => state?.reviews?.error);
   const selectedReview = useSelector((state) => state?.reviews?.selectedReview);
   const singleReview = useSelector((state) => state?.reviews?.singleReview);
+  const searchReviews = useSelector((state) => state?.reviews?.searchReviews);
+  const loading = useSelector((state) => state?.reviews?.loading);
+
   return {
     reviews,
     reviewError,
+    searchReviews,
     selectedReview,
     singleReview,
   };

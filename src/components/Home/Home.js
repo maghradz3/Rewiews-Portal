@@ -4,6 +4,7 @@ import { getAllReviews } from "../../redux/slice";
 import { useReview } from "../../hooks";
 import { Button } from "../../atoms";
 import { AllReviewItem } from "./AllReviewItem";
+import { SearchBar } from "./SearchBar";
 
 export const Home = () => {
   const dispatch = useDispatch();

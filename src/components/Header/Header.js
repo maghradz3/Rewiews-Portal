@@ -8,9 +8,14 @@ import Container from "@mui/material/Container";
 import { UserIcon } from "./UserIcon";
 import { Button } from "../../atoms";
 import { useNavigate } from "react-router";
+import { SearchBar } from "../Home/SearchBar";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { getAllReviews } from "../../redux/slice";
 
 export const Header = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const moveToUploadHandler = () => {
     navigate("/reviewUpload");
   };
@@ -22,6 +27,10 @@ export const Header = () => {
     navigate("/adminPanel");
   };
 
+  useEffect(() => {
+    dispatch(getAllReviews());
+  }, []);
+
   return (
     <AppBar sx={{ backgroundColor: "black" }}>
       <Container maxWidth="xl">
@@ -31,6 +40,7 @@ export const Header = () => {
             <Button onClick={moveToUploadHandler}>Write a Review</Button>
             <Button onClick={moveToAdminPanelHandler}>Admin Panel</Button>
           </Box>
+          <SearchBar />
           <Box sx={{ flexGrow: 0 }}>
             <UserIcon />
           </Box>

@@ -116,12 +116,25 @@ export const deleteCommentToReview = createAsyncThunk(
   }
 );
 
+export const searchReviews = createAsyncThunk(
+  "reviews/search",
+  async (query, { rejectWithValue }) => {
+    try {
+      const { data } = await axiosInstance.get(`/review/search?q=${query}`);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error?.response?.data);
+    }
+  }
+);
+
 const reviewsSlice = createSlice({
   name: "reviews",
   initialState: {
     loading: false,
     error: null,
     selectedReview: null,
+    searchReviews: [],
     singleReview: null,
     reviews: [],
   },
@@ -168,6 +181,17 @@ const reviewsSlice = createSlice({
       state.error = action.payload;
     });
     builder.addCase(deleteCommentToReview.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    });
+    builder.addCase(searchReviews.pending, (state, action) => {
+      state.loading = true;
+    });
+    builder.addCase(searchReviews.fulfilled, (state, action) => {
+      state.loading = false;
+      state.searchReviews = action.payload;
+    });
+    builder.addCase(searchReviews.rejected, (state, action) => {
       state.loading = false;
       state.error = action.payload;
     });
