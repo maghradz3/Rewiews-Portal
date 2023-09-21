@@ -1,12 +1,4 @@
-import {
-  Avatar,
-  Icon,
-  IconButton,
-  Menu,
-  styled,
-  Box,
-  MenuItem,
-} from "@mui/material";
+import { styled, Box } from "@mui/material";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
@@ -39,22 +31,41 @@ export const UserIcon = () => {
           )}
         </div>
       </label>
+
       <ul
         tabIndex={0}
         className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
       >
-        <li>
-          <Button onClick={() => navigate("/register")}>
-            Sign Up
-            <span className="badge">New</span>
-          </Button>
-        </li>
-        <li>
-          <Button onClick={() => navigate("/login")}>Log In</Button>
-        </li>
-        <li>
-          <Button onClick={() => navigate("/")}> Menu</Button>
-        </li>
+        {!userInfo ? (
+          <>
+            <li>
+              <Button onClick={() => navigate("/register")}>
+                Sign Up
+                <span className="badge">New</span>
+              </Button>
+            </li>
+            <li>
+              <Button onClick={() => navigate("/login")}>Log In</Button>
+            </li>
+            <li>
+              <Button onClick={() => navigate("/")}> Menu</Button>
+            </li>
+          </>
+        ) : (
+          <>
+            <li>
+              <Button
+                onClick={() => {
+                  dispatch(logoutUser());
+                  navigate("/login");
+                }}
+              >
+                {" "}
+                Log out
+              </Button>
+            </li>
+          </>
+        )}
       </ul>
     </div>
     // <Box>

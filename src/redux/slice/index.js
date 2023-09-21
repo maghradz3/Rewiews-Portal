@@ -18,3 +18,5 @@ export {
   addCommentToReview,
   deleteCommentToReview,
 } from "./reviewsSlice";
+
+export { toggleTheme, themeReducer } from "./themeSlice";

@@ -3,7 +3,7 @@ import { Home } from "../components/Home";
 
 export const HomePage = () => {
   return (
-    <div className="pr-[40px] pl-[40px] ">
+    <div>
       <Home />
     </div>
   );

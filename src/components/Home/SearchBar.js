@@ -48,11 +48,13 @@ export const SearchBar = () => {
         onKeyUp={handleSearch}
         type="text"
         placeholder="Search"
-        className="input input-bordered w-24 md:w-auto"
+        className="input input-bordered w-full px-2 py-1 md:px-4 md:py-2 transition-shadow focus:ring-2 focus:ring-indigo-400 focus:outline-none"
       />
       {isOpen && (
-        <ul className="absolute left-0 z-10 w-full mt-2 overflow-hidden bg-black border border-gray-300 rounded shadow-lg">
-          {loading === "loading" && <li>Loading...</li>}
+        <ul className="absolute left-0 z-10 w-full mt-1 overflow-hidden bg-white border border-gray-300 rounded shadow-lg">
+          {loading === "loading" && (
+            <li className="px-4 py-2 text-gray-500">Loading...</li>
+          )}
           {searchRev.map((review) => (
             <li
               onClick={() => {
@@ -60,10 +62,10 @@ export const SearchBar = () => {
                 navigate(`/singleReview/${review._id}`);
               }}
               key={review._id}
-              className="px-4 py-2   hover:bg-gray-100 cursor-pointer "
+              className="px-4 py-2 hover:bg-gray-100 cursor-pointer transition-colors duration-200 ease-in "
             >
-              <h1 className="text-black-500"> {review.title}</h1>
-              <img className=" h-[50px]" src={review.image} />
+              <h1 className="text-gray-800"> {review.title}</h1>
+              <img className="h-12 w-auto object-cover" src={review.image} />
             </li>
           ))}
         </ul>
