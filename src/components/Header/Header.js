@@ -12,6 +12,7 @@ import { SearchBar } from "../Home/SearchBar";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { getAllReviews } from "../../redux/slice";
+import { FcHome } from "react-icons/fc";
 
 export const Header = () => {
   const navigate = useNavigate();
@@ -32,20 +33,24 @@ export const Header = () => {
   }, []);
 
   return (
-    <AppBar sx={{ backgroundColor: "black" }}>
-      <Container maxWidth="xl">
-        <Toolbar className="flex justify-between ">
-          <Box>
-            <Button onClick={moveToAuthorReviewsHandler}>My Reviews</Button>
-            <Button onClick={moveToUploadHandler}>Write a Review</Button>
-            <Button onClick={moveToAdminPanelHandler}>Admin Panel</Button>
-          </Box>
+    <div className="navbar bg-base-100">
+      <div className="flex-1">
+        <a className="btn btn-ghost normal-case text-xl">
+          <FcHome className="text-4xl" />
+        </a>
+      </div>
+      <div className="flex-1">
+        <Button onClick={moveToAuthorReviewsHandler}>My Reviews</Button>
+        <Button onClick={moveToUploadHandler}>Write a Review</Button>
+        <Button onClick={moveToAdminPanelHandler}>Admin Panel</Button>
+      </div>
+      <div></div>
+      <div className="flex-none gap-2">
+        <div className="form-control">
           <SearchBar />
-          <Box sx={{ flexGrow: 0 }}>
-            <UserIcon />
-          </Box>
-        </Toolbar>
-      </Container>
-    </AppBar>
+        </div>
+      </div>
+      <UserIcon />
+    </div>
   );
 };

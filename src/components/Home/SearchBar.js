@@ -43,11 +43,12 @@ export const SearchBar = () => {
   return (
     <div ref={wrapperRef} className="relative">
       <input
-        className="px-3 py-2 text-red-400 border border-gray-300 rounded"
-        type="text"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         onKeyUp={handleSearch}
+        type="text"
+        placeholder="Search"
+        className="input input-bordered w-24 md:w-auto"
       />
       {isOpen && (
         <ul className="absolute left-0 z-10 w-full mt-2 overflow-hidden bg-black border border-gray-300 rounded shadow-lg">

@@ -1,7 +1,10 @@
 import axios from "axios";
+import env from "react-dotenv";
+
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
 export const axiosInstance = axios.create({
-  baseURL: "http://localhost:5000",
+  baseURL: backendUrl,
 });
 
 axiosInstance.interceptors.request.use((req) => {
@@ -23,7 +26,7 @@ axiosInstance.interceptors.response.use(
     ) {
       const refreshToken = localStorage.getItem("refreshToken");
       axios
-        .post("http://localhost:5000", {
+        .post("https://reviews-portal-back.onrender.com/user/refresh", {
           refresh_token: refreshToken,
         })
         .then(({ data }) => {

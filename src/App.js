@@ -13,12 +13,12 @@ const StyledGrid = styled(Grid)(() => ({
 
 function App() {
   return (
-    <Grid sx={{ minHeight: "100vh" }}>
+    <div>
       <Header />
       <StyledGrid item>
         <RouteComponent />
       </StyledGrid>
-    </Grid>
+    </div>
   );
 }
 
