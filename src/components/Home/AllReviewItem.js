@@ -81,7 +81,7 @@ export const AllReviewItem = ({ review }) => {
 
   return (
     <LoadingWrapper isLoading={loading}>
-      <Card className=" w-full md:w-1/2 lg:w-1/4 m-2  ">
+      <Card className=" w-full md:w-1/2 lg:w-1/4 relative m-2  ">
         <CardHeader
           avatar={
             <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
@@ -149,7 +149,7 @@ export const AllReviewItem = ({ review }) => {
             {review.content}
           </Typography>
         </CardContent>
-        <CardActions className="flex justify-between">
+        <CardActions className="flex justify-between ">
           <IconButton aria-label="add to favorites" onClick={addLikeHandler}>
             <FavoriteIcon
               sx={
