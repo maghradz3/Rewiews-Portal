@@ -3,7 +3,7 @@ import { AddReviewForm } from "../components/Reviews";
 
 export const ReviewPage = () => {
   return (
-    <div>
+    <div className="h-[100vh]">
       <AddReviewForm />
     </div>
   );
