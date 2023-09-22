@@ -8,7 +8,7 @@ export const AuthorReviews = () => {
   const { userInfo } = useUser();
 
   return (
-    <div className="container mx-auto  flex justify-center gap-[50px] flex-wrap border-solid border-2 border-rose  ">
+    <div className="container mx-auto  flex justify-center gap-[50px] flex-wrap   ">
       {reviews
         .filter((review) => review.author._id === userInfo._id)
         .map((review) => (

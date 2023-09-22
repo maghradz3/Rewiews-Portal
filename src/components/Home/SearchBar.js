@@ -38,14 +38,17 @@ export const SearchBar = () => {
 
   return (
     <div ref={wrapperRef} className="relative">
-      <input
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-        onKeyUp={handleSearch}
-        type="text"
-        placeholder="Search"
-        className="input input-bordered w-full px-2 py-1 md:px-4 md:py-2 transition-shadow focus:ring-2 focus:ring-indigo-400 focus:outline-none"
-      />
+      <div className="form-control">
+        <input
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          onKeyUp={handleSearch}
+          type="text"
+          placeholder="Search"
+          className="input input-bordered w-24 md:w-auto transition-shadow focus:ring-2 focus:ring-indigo-400 focus:outline-none"
+        />
+      </div>
+
       {isOpen && (
         <ul className="absolute left-0 z-10 w-full mt-1 overflow-hidden bg-white border border-gray-300 rounded shadow-lg">
           {loading === "loading" && (

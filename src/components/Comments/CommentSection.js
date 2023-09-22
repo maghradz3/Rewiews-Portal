@@ -3,11 +3,12 @@ import { FcEmptyTrash } from "react-icons/fc";
 import { Button } from "../../atoms";
 import { useDispatch } from "react-redux";
 import { deleteCommentToReview } from "../../redux/slice";
-import { useReview } from "../../hooks";
+import { useReview, useTheme } from "../../hooks";
 
 export const CommentSection = ({ comment, users, reviewId }) => {
-  const { reviewError } = useReview();
-  console.log(reviewError);
+  const { theme } = useTheme();
+
+  const txtColor = theme !== "dark" ? "text-[#BD9696]" : "text-[#1a242f]";
 
   const userInit = users.filter((user) => user._id === comment.user)[0];
   const userInitials =
@@ -44,7 +45,7 @@ export const CommentSection = ({ comment, users, reviewId }) => {
           </span>
         </div>
         <div className="flex justify-between">
-          <span className="text-black-700">{comment.text}</span>
+          <span className={`${txtColor}`}>{comment.text}</span>
           <Button onClick={deleteCommentHandler}>
             <FcEmptyTrash className="cursor-pointer text-xl hover:text-2xl ease-in duration-300 " />
           </Button>

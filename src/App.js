@@ -14,12 +14,13 @@ import { useTheme } from "./hooks";
 
 function App() {
   const { theme } = useTheme();
+  console.log(theme);
   const bgColor = theme === "dark" ? "bg-[#1a242f]" : "bg-[#F0F0F0]";
 
   return (
     <Grid>
       <Header />
-      <Grid className={`${bgColor} pt-5 h-[100vh] `} item>
+      <Grid className={`${bgColor} pt-5  `} item>
         <RouteComponent />
       </Grid>
     </Grid>

@@ -66,15 +66,7 @@ export const AddReviewForm = () => {
   };
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-        gap: "10px",
-      }}
-    >
+    <Box className="flex flex-col items-center justify-center gap-4 p-6 md:p-10 bg-gray-200 dark:bg-gray-800 rounded-lg max-w-md mx-auto mt-10 shadow-lg">
       <Input
         name="title"
         label="Title"
@@ -105,24 +97,7 @@ export const AddReviewForm = () => {
         multiline
         rows={4}
       />
-      <div className="flex center gap-10 ">
-        <label className="text-white" htmlFor="category">
-          Category
-        </label>
-        <select
-          name="category"
-          onChange={onFormChange}
-          value={reviewFormValues.category.value}
-          error={reviewFormValues.category.error}
-        >
-          <option className="text-black" value="">
-            Select Category
-          </option>
-          <option value="Movies">Movies</option>
-          <option value="Books">Books</option>
-          <option value="Games">Games</option>
-        </select>
-      </div>
+
       <Input
         name="rating"
         label="Rating"
@@ -133,24 +108,40 @@ export const AddReviewForm = () => {
         error={reviewFormValues.rating.error}
         onChange={onFormChange}
       />
-      <div className="flex flex-col justify-between gap-2">
-        <label className="text-white" name="textarrea">
-          Deep Description
-        </label>
-        <TextareaAutosize
-          name="textarrea"
-          value={reviewFormValues.textarrea.value}
+      <div className="flex center gap-10 ">
+        <select
+          className="select select-info w-full max-w-xs"
+          name="category"
           onChange={onFormChange}
-          minRows={3}
-        />
+          value={reviewFormValues.category.value}
+          error={reviewFormValues.category.error}
+        >
+          <option disabled selected className="text-black" value="">
+            Select Category
+          </option>
+          <option value="Movies">Movies</option>
+          <option value="Books">Books</option>
+          <option value="Games">Games</option>
+        </select>
       </div>
-      <FileBase64
-        type="file"
-        multiple={false}
-        onDone={({ base64 }) => {
-          setImage(base64);
-        }}
+
+      <textarea
+        className="textarea textarea-info"
+        placeholder="Deep Description"
+        name="textarrea"
+        value={reviewFormValues.textarrea.value}
+        onChange={onFormChange}
+        //   minRows={3}
       />
+
+      <label className="mt-4 text-gray-300 cursor-pointer transition duration-500 ease-in-out inline-block text-center p-2 w-full rounded-md border border-black hover:bg-blue-500 hover:text-white cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+        <span>Upload Image</span>
+        <FileBase64
+          type="file"
+          multiple={false}
+          onDone={({ base64 }) => setImage(base64)}
+        />
+      </label>
       <Button onClick={onSubmit}>Add Review</Button>
     </Box>
   );
