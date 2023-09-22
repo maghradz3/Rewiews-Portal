@@ -28,7 +28,7 @@ export const LoginForm = () => {
       });
   };
   return (
-    <Box className="flex flex-col items-center justify-center gap-4 p-6 w-full max-w-md mx-auto mt-10 bg-white rounded-md shadow-md dark:bg-gray-800">
+    <Box className="flex flex-col items-center justify-center gap-4 p-6 md:p-10 bg-gray-200 dark:bg-gray-800 rounded-lg max-w-md mx-auto mt-10 shadow-lg">
       <Input
         name="email"
         label="email"

@@ -8,13 +8,16 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { getAllReviews } from "../../redux/slice";
 import { FcHome } from "react-icons/fc";
-import { useTheme } from "../../hooks";
+import { useTheme, useUser } from "../../hooks";
 import { toggleTheme } from "../../redux/slice";
 import { MdDarkMode } from "react-icons/md";
+import { isUserAdmin } from "../../helpers";
 
 export const Header = () => {
   const navigate = useNavigate();
+
   const dispatch = useDispatch();
+  const { userInfo } = useUser();
   const { theme } = useTheme();
   const moveToUploadHandler = () => {
     navigate("/reviewUpload");
@@ -38,12 +41,18 @@ export const Header = () => {
   }, [theme]);
 
   return (
-    <div className="navbar bg-base-100 px-4 md:px-8 lg:px-8">
+    <div className="navbar bg-base-100 px-4 xs:pl-1 md:px-8 lg:px-8">
       <div className="flex-1 flex items-center justify-start">
-        <a className="btn btn-ghost btn-gray-400 normal-case text-xl">
-          <Button onClick={() => navigate("/")}>
-            <FcHome className="text-4xl" />
-          </Button>
+        <a
+          onClick={() => navigate("/")}
+          className="btn btn-ghost btn-gray-400 normal-case text-xl"
+        >
+          {/* <button
+            className="text-xs sm:text-sm md:text-base"
+            onClick={() => navigate("/")}
+          > */}
+          <FcHome className="text-4xl" />
+          {/* </button> */}
         </a>
       </div>
       <div className="flex-none gap-2">
@@ -52,34 +61,33 @@ export const Header = () => {
         </div>
       </div>
       <div className="flex-1 flex items-center justify-center gap-2 md:gap-4">
-        <Button
-          className="text-sm md:text-base lg:text-lg px-2 md:px-4 lg:px-6 py-1 md:py-2 lg:py-3"
-          onClick={moveToAuthorReviewsHandler}
-        >
-          My Reviews
-        </Button>
-        <Button
-          className="text-sm md:text-base lg:text-lg px-2 md:px-4 lg:px-6 py-1 md:py-2 lg:py-3"
-          onClick={moveToUploadHandler}
-        >
-          Write a Review
-        </Button>
-        <Button
-          className="text-sm md:text-base lg:text-lg px-2 md:px-4 lg:px-6 py-1 md:py-2 lg:py-3"
-          onClick={moveToAdminPanelHandler}
-        >
-          Admin Panel
-        </Button>
-      </div>
-      <div className="flex items-center justify-end">
-        <Button
-          className="text-sm md:text-base lg:text-lg px-2 md:px-4 lg:px-6 py-1 md:py-2 lg:py-3"
-          onClick={() => dispatch(toggleTheme())}
-        >
-          <MdDarkMode className="text-xl" />
-        </Button>
-      </div>
+        <ul className="menu menu-vertical lg:menu-horizontal bg-base-200  rounded-box  ">
+          {userInfo && (
+            <>
+              <li>
+                <a onClick={moveToAuthorReviewsHandler}>MY REVIEWS</a>
+              </li>
+              <li>
+                <a onClick={moveToUploadHandler}>WRITE A REVIEW</a>
+              </li>
+            </>
+          )}
+          {isUserAdmin(userInfo) && (
+            <li>
+              <a onClick={moveToAdminPanelHandler}>ADMIN PANEL</a>
+            </li>
+          )}
+        </ul>
 
+        <div className="flex items-center justify-end">
+          <button
+            className="btn btn-ghost text-xs sm:text-sm md:text-base"
+            onClick={() => dispatch(toggleTheme())}
+          >
+            <MdDarkMode className="text-xl" />
+          </button>
+        </div>
+      </div>
       <UserIcon />
     </div>
   );

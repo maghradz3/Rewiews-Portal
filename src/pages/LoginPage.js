@@ -3,7 +3,7 @@ import { LoginForm } from "../components/Login";
 
 export const LoginPage = () => {
   return (
-    <div>
+    <div className="h-[100vh]">
       <LoginForm />
     </div>
   );

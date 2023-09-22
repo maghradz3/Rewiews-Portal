@@ -3,7 +3,7 @@ import { RegisterForm } from "../components/Register";
 
 export const RegisterPage = () => {
   return (
-    <div>
+    <div className="h-[100vh]">
       <RegisterForm />
     </div>
   );
