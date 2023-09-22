@@ -28,15 +28,7 @@ export const LoginForm = () => {
       });
   };
   return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-        gap: "10px",
-      }}
-    >
+    <Box className="flex flex-col items-center justify-center gap-4 p-6 w-full max-w-md mx-auto mt-10 bg-white rounded-md shadow-md dark:bg-gray-800">
       <Input
         name="email"
         label="email"

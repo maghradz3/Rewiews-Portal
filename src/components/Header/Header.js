@@ -37,16 +37,19 @@ export const Header = () => {
     root.classList.add(theme);
   }, [theme]);
 
-  console.log(theme);
-
   return (
     <div className="navbar bg-base-100 px-4 md:px-8 lg:px-8">
       <div className="flex-1 flex items-center justify-start">
-        <a className="btn btn-ghost normal-case text-xl">
+        <a className="btn btn-ghost btn-gray-400 normal-case text-xl">
           <Button onClick={() => navigate("/")}>
             <FcHome className="text-4xl" />
           </Button>
         </a>
+      </div>
+      <div className="flex-none gap-2">
+        <div className="form-control">
+          <SearchBar />
+        </div>
       </div>
       <div className="flex-1 flex items-center justify-center gap-2 md:gap-4">
         <Button
@@ -76,11 +79,7 @@ export const Header = () => {
           <MdDarkMode className="text-xl" />
         </Button>
       </div>
-      <div className="flex-none gap-2">
-        <div className="form-control">
-          <SearchBar />
-        </div>
-      </div>
+
       <UserIcon />
     </div>
   );

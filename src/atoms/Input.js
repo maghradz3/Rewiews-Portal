@@ -25,7 +25,23 @@ export const Input = ({
       error={Boolean(error)}
       value={value}
       helperText={error}
-      InputLabelProps={{ sx: { color: "white" } }}
+      InputLabelProps={{ sx: { color: "gray" } }}
+      sx={{
+        ".MuiOutlinedInput-root": {
+          "& fieldset": {
+            borderColor: "gray",
+          },
+          "&:hover fieldset": {
+            borderColor: "gray",
+          },
+          "&.Mui-focused fieldset": {
+            borderColor: "gray",
+          },
+        },
+        ".MuiFormLabel-root.Mui-focused": {
+          color: "gray",
+        },
+      }}
     />
   );
 };

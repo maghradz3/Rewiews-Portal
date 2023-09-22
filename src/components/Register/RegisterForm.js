@@ -39,15 +39,7 @@ export const RegisterForm = () => {
   };
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-        gap: "10px",
-      }}
-    >
+    <Box className="flex flex-col items-center justify-center gap-4 p-6 md:p-10 bg-gray-200 dark:bg-gray-800 rounded-lg max-w-md mx-auto mt-10 shadow-lg">
       <Input
         name="firstName"
         label="firstName"
@@ -76,13 +68,14 @@ export const RegisterForm = () => {
         error={registerFormValues.password.error}
         onChange={onFormChange}
       />
-      <FileBase64
-        type="file"
-        multiple={false}
-        onDone={({ base64 }) => {
-          setImage(base64);
-        }}
-      />
+      <label className="mt-4 text-gray-300 cursor-pointer transition duration-500 ease-in-out inline-block text-center p-2 w-full rounded-md border border-black hover:bg-blue-500 hover:text-white cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+        <span>Upload Image</span>
+        <FileBase64
+          type="file"
+          multiple={false}
+          onDone={({ base64 }) => setImage(base64)}
+        />
+      </label>
       <Button onClick={onSubmit}>Register</Button>
     </Box>
   );

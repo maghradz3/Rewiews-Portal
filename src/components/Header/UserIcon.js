@@ -6,26 +6,21 @@ import { useUser } from "../../hooks";
 import { Button } from "../../atoms";
 import { logoutUser } from "../../redux/slice";
 import { getUserInitials } from "../../helpers";
-const StyledBox = styled(Box)(() => ({
-  display: "flex",
-  flexDirection: "column",
-
-  borderRadius: 10,
-}));
+import { BsFillPersonPlusFill } from "react-icons/bs";
 
 export const UserIcon = () => {
-  const [anchor, setAnchor] = useState(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { userInfo } = useUser();
-  console.log(userInfo);
 
   return (
     <div className="dropdown dropdown-end">
-      <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-        <div className="w-10 rounded-full">
-          {userInfo?.profilePicture ? (
-            <img className="w-full h-full" src={userInfo?.profilePicture} />
+      <label tabIndex={0} className="btn  btn-gray-300 btn-circle avatar">
+        <div className="w-10 rounded-full flex justify-center items-center">
+          {!userInfo ? (
+            <div className="flex justify-center align-center">
+              <BsFillPersonPlusFill className="text-3xl  my-[5px]" />
+            </div>
           ) : (
             <h1 className="text-2xl"> {getUserInitials(userInfo)}</h1>
           )}
@@ -68,53 +63,5 @@ export const UserIcon = () => {
         )}
       </ul>
     </div>
-    // <Box>
-    //   <IconButton onClick={(e) => setAnchor(e.currentTarget)}>
-    //     <Avatar>
-    //       {userInfo?.profilePicture ? (
-    //         <img className="w-full h-full" src={userInfo?.profilePicture} />
-    //       ) : (
-    //         getUserInitials(userInfo)
-    //       )}
-    //     </Avatar>
-    //   </IconButton>
-    //   <Menu
-    //     anchorEl={anchor}
-    //     open={Boolean(anchor)}
-    //     onClose={() => setAnchor(null)}
-    //   >
-    //     <StyledBox>
-    //       {!userInfo ? (
-    //         <>
-    //           <MenuItem>
-    //             <Button onClick={() => navigate("/login")}>Log In</Button>
-    //           </MenuItem>
-    //           <MenuItem>
-    //             <Button onClick={() => navigate("/register")}>Sign Up</Button>
-    //           </MenuItem>
-    //           <MenuItem>
-    //             <Button onClick={() => navigate("/")}> Menu</Button>
-    //           </MenuItem>
-    //         </>
-    //       ) : (
-    //         <>
-    //           <MenuItem>
-    //             <Button onClick={() => navigate("/")}> Menu</Button>
-    //           </MenuItem>
-    //           <MenuItem>
-    //             <Button
-    //               onClick={() => {
-    //                 dispatch(logoutUser());
-    //                 navigate("/register");
-    //               }}
-    //             >
-    //               Log Out
-    //             </Button>
-    //           </MenuItem>
-    //         </>
-    //       )}
-    //     </StyledBox>
-    //   </Menu>
-    // </Box>
   );
 };

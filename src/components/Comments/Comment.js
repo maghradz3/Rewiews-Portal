@@ -25,8 +25,7 @@ export const Comment = ({ reviewId, comments }) => {
     setInputValue("");
   };
 
-  console.log("kpl,,,", comments);
-  console.log(reviewId);
+
 
   return (
     <div className="flex flex-col">

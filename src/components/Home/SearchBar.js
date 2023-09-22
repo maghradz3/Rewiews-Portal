@@ -2,9 +2,8 @@ import React, { useState, useRef, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { searchReviews } from "../../redux/slice";
 import { useReview } from "../../hooks";
-import { Typography, Autocomplete, Box, TextField } from "@mui/material";
-import { Link, useNavigate } from "react-router-dom";
-import { Button } from "../../atoms";
+import { useNavigate } from "react-router-dom";
+
 import { getSingleREview } from "../../redux/slice";
 
 export const SearchBar = () => {
@@ -14,8 +13,6 @@ export const SearchBar = () => {
   const { loading, searchReviews: searchRev } = useReview();
   const wrapperRef = useRef(null);
 
-  console.log(query);
-
   const navigate = useNavigate();
 
   const handleSearch = () => {
@@ -23,7 +20,6 @@ export const SearchBar = () => {
       dispatch(searchReviews(query.trim()));
       setIsOpen(true);
     } else {
-      console.log("araa stringi");
       setIsOpen(false);
     }
   };

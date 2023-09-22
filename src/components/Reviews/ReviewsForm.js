@@ -20,7 +20,6 @@ export const AddReviewForm = () => {
   } = useForm(generateReviewsFormValues());
   const { userInfo } = useUser();
   const { selectedReview } = useReview();
-  console.log(selectedReview);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -41,8 +40,6 @@ export const AddReviewForm = () => {
     const rating = reviewFormValues.rating.value;
     const textarrea = reviewFormValues.textarrea.value;
 
-    console.log(title, artworkName, content, tags, rating, image);
-
     dispatch(
       uploadReview({
         formValues: {
@@ -62,7 +59,6 @@ export const AddReviewForm = () => {
       .unwrap()
       .then(() => {
         navigate("/");
-        console.log("Review Added");
       })
       .catch((err) => {
         console.log(err);

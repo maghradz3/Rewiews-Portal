@@ -19,7 +19,7 @@ function App() {
   return (
     <Grid>
       <Header />
-      <Grid className={`${bgColor} pt-20`} item>
+      <Grid className={`${bgColor} pt-5 h-[100vh] `} item>
         <RouteComponent />
       </Grid>
     </Grid>

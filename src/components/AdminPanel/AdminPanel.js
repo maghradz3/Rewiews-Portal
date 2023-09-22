@@ -15,15 +15,13 @@ export const AdminPanel = () => {
   }, []);
 
   return (
-    <div className="flex flex-col flew-wrap border-2  p-3 gap-12 ">
-      <h1 className="self-center text-white text-5xl">Admin Panel</h1>
-      <div className="flex flex-wrap gap-2">
+    <div className="flex flex-col items-center p-6 gap-6 bg-gray-200 dark:bg-gray-800 min-h-screen">
+      <h1 className="text-4xl md:text-5xl text-white font-semibold">
+        Admin Panel
+      </h1>
+      <div className="flex flex-wrap justify-center gap-6 w-full max-w-6xl">
         {users.map((user) => (
-          <UserActions
-            className="width-1/3 border-2 border-solid border-red-500"
-            key={user._id}
-            user={user}
-          />
+          <UserActions key={user._id} user={user} />
         ))}
       </div>
     </div>

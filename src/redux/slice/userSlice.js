@@ -9,7 +9,7 @@ export const authenticatedUser = createAsyncThunk(
       const { data } = await axiosInstance.post(route, formValues);
       localStorage.setItem("token", data.token);
       localStorage.setItem("refreshToken", data.refreshToken);
-      console.log(data.user);
+
       return data;
     } catch (error) {
       return rejectWithValue(error?.response?.data);
@@ -22,7 +22,7 @@ export const getAllUsers = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const { data } = await axiosInstance.get("/user/users");
-      console.log(data);
+
       return data;
     } catch (error) {
       return rejectWithValue(error?.response?.data);
@@ -52,7 +52,7 @@ const userSlice = createSlice({
     users: [],
   },
   reducers: {
-    logoutUser: (state, action) => {
+    logoutUser: (state) => {
       state.userInfo = null;
       localStorage.removeItem("token");
       localStorage.removeItem("refreshToken");

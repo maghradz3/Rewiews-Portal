@@ -12,6 +12,10 @@ html {
   font-family: 'Noto Sans JP', sans-serif;
 }
 
+.fileBase64 input {
+  display: none;
+}
+
 /* body {
   margin: 0;
   background-color: #3f3f3f;

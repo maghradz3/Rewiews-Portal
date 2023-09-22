@@ -21,7 +21,7 @@ export const getAllReviews = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const { data } = await axiosInstance.get("/review/");
-      console.log(data);
+
       return data;
     } catch (error) {
       return rejectWithValue(error?.response?.data);
@@ -60,7 +60,6 @@ export const addLikeToReview = createAsyncThunk(
     try {
       const { data } = await axiosInstance.post(`/review/${reviewId}/likes/`);
 
-      console.log(data);
       dispatch(getAllReviews());
       return data;
     } catch (error) {
@@ -75,7 +74,6 @@ export const addDisLikeToReview = createAsyncThunk(
     try {
       const { data } = await axiosInstance.delete(`/review/${reviewId}/likes/`);
 
-      console.log(data);
       dispatch(getAllReviews());
       return data;
     } catch (error) {
@@ -92,7 +90,7 @@ export const addCommentToReview = createAsyncThunk(
         `/review/${reviewId}/comments/`,
         { text: inputValue }
       );
-      console.log(data);
+
       dispatch(getAllReviews());
       return data;
     } catch (error) {}
@@ -182,7 +180,7 @@ const reviewsSlice = createSlice({
     });
     builder.addCase(deleteCommentToReview.rejected, (state, action) => {
       state.loading = false;
-      state.error = action.payload;
+      state.error = action.error.message;
     });
     builder.addCase(searchReviews.pending, (state, action) => {
       state.loading = true;
