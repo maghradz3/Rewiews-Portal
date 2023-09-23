@@ -36,7 +36,7 @@ export const getSingleREview = createAsyncThunk(
       const { data } = await axiosInstance.get(`/review/${reviewId}`);
       return data;
     } catch (error) {
-      return rejectWithValue(error?.response?.data);
+      return rejectWithValue(error?.response?.data?.message);
     }
   }
 );
@@ -49,7 +49,7 @@ export const deleteReview = createAsyncThunk(
       dispatch(getAllReviews());
       return data;
     } catch (error) {
-      return rejectWithValue(error);
+      return rejectWithValue(error?.response?.data?.message);
     }
   }
 );
@@ -63,7 +63,7 @@ export const addLikeToReview = createAsyncThunk(
       dispatch(getAllReviews());
       return data;
     } catch (error) {
-      return rejectWithValue(error);
+      return rejectWithValue(error?.response?.data?.message);
     }
   }
 );
@@ -108,8 +108,7 @@ export const deleteCommentToReview = createAsyncThunk(
       dispatch(getAllReviews());
       return data;
     } catch (error) {
-      console.error(error);
-      return rejectWithValue(error);
+      return rejectWithValue(error?.response?.data?.message);
     }
   }
 );
@@ -170,17 +169,14 @@ const reviewsSlice = createSlice({
       state.loading = false;
       state.singleReview = action.payload;
     });
-    builder.addCase(getSingleREview.rejected, (state, action) => {
+    builder.addCase(getSingleREview.rejected, (state, a) => {
       state.loading = false;
-      state.error = action.payload;
     });
     builder.addCase(deleteReview.rejected, (state, action) => {
       state.loading = false;
-      state.error = action.payload;
     });
     builder.addCase(deleteCommentToReview.rejected, (state, action) => {
       state.loading = false;
-      state.error = action.error.message;
     });
     builder.addCase(searchReviews.pending, (state, action) => {
       state.loading = true;

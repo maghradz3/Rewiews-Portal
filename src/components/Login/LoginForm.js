@@ -3,14 +3,15 @@ import { generateLoginFormValues } from "./generateLoginFormValues";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import { authenticatedUser } from "../../redux/slice";
-import { Button, Input } from "../../atoms";
+import { Alert, Button, Input } from "../../atoms";
 import { Box } from "@mui/material";
-import { useForm } from "../../hooks";
+import { useForm, useAlert } from "../../hooks";
 
 export const LoginForm = () => {
   const { formValues: loginFormValues, onFormChange } = useForm(
     generateLoginFormValues()
   );
+  const { alertState, handleClose, showAlert } = useAlert();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const onSubmit = () => {
@@ -23,8 +24,10 @@ export const LoginForm = () => {
       .then(() => {
         navigate("/");
       })
-      .catch((err) => {
-        console.log(err);
+      .catch((error) => {
+        const { message } = error;
+        const errorMessage = `${message} mail or password is incorrect!`;
+        showAlert("error", errorMessage);
       });
   };
   return (
@@ -44,6 +47,7 @@ export const LoginForm = () => {
         onChange={onFormChange}
       />
       <Button onClick={onSubmit}>Login</Button>
+      <Alert {...alertState} handleClose={handleClose} />
     </Box>
   );
 };

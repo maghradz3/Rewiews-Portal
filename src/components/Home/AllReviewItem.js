@@ -16,8 +16,8 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { getAuthorInitials } from "../../helpers";
-import { Menu, MenuItem, Button, Box } from "@mui/material";
-import { useReview, useUser } from "../../hooks";
+import { Menu, MenuItem, Button, Box, Alert as MUIAlert } from "@mui/material";
+import { useAlert, useReview, useUser } from "../../hooks";
 import { useDispatch } from "react-redux";
 import {
   deleteReview,
@@ -32,7 +32,7 @@ import { IoHeartDislike } from "react-icons/io5";
 import { Comment } from "../Comments";
 import { useNavigate } from "react-router";
 import { isUserAdmin } from "../../helpers";
-import { LoadingWrapper } from "../../atoms";
+import { Alert, LoadingWrapper } from "../../atoms";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -57,9 +57,10 @@ export const AllReviewItem = ({ review }) => {
   const [expanded, setExpanded] = useState(false);
   const [anchor, setAnchor] = useState(null);
 
+  const { alertState, handleClose, showAlert } = useAlert();
+
   const { userInfo } = useUser();
   const { loading, error } = useReview();
-  console.log(error);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -68,16 +69,36 @@ export const AllReviewItem = ({ review }) => {
   const dispatch = useDispatch();
 
   const deleteReviewHandler = () => {
-    dispatch(deleteReview(review._id));
+    dispatch(deleteReview(review._id))
+      .unwrap()
+      .then(() => {})
+      .catch((error) => {
+        const { message } = error;
+        const errorMessage = `${message} This is not your review!`;
+        showAlert("error", errorMessage);
+      });
   };
 
   const addLikeHandler = () => {
-    dispatch(addLikeToReview(review._id));
+    dispatch(addLikeToReview(review._id))
+      .unwrap()
+      .catch((error) => {
+        const { message } = error;
+        const actionMessage = userInfo
+          ? "You already Liked this Review"
+          : "You are not Authenticated";
+        const errorMessage = `${message} ${actionMessage}`;
+        showAlert("error", errorMessage);
+      });
   };
 
   const addDisLikeHandler = () => {
     dispatch(addDisLikeToReview(review._id));
   };
+
+  const buttonInfo =
+    isUserAdmin(userInfo) || review?.author?._id === userInfo?._id;
+  console.log(buttonInfo);
 
   return (
     <LoadingWrapper isLoading={loading}>
@@ -110,23 +131,27 @@ export const AllReviewItem = ({ review }) => {
                 onClose={() => setAnchor(null)}
               >
                 <StyledBox>
-                  {/* {userInfo._id === review?.author?._id && ( */}
-                  <>
-                    <MenuItem>
-                      <Button onClick={deleteReviewHandler}>Delete</Button>
-                    </MenuItem>
-                    <MenuItem>
-                      <Button
-                        onClick={() => {
-                          dispatch(setSelectedReview(review));
-                          navigate(`/${title}/edit`);
-                        }}
-                      >
-                        Edit
-                      </Button>
-                    </MenuItem>
-                  </>
-                  {/* )} */}
+                  {buttonInfo ? (
+                    <>
+                      <MenuItem>
+                        <Button onClick={deleteReviewHandler}>Delete</Button>
+                      </MenuItem>
+                      <MenuItem>
+                        <Button
+                          onClick={() => {
+                            dispatch(setSelectedReview(review));
+                            navigate(`/${title}/edit`);
+                          }}
+                        >
+                          Edit
+                        </Button>
+                      </MenuItem>
+                    </>
+                  ) : (
+                    <MUIAlert severity="error">
+                      This is not your Review
+                    </MUIAlert>
+                  )}
                 </StyledBox>
               </Menu>
             </>
@@ -145,7 +170,11 @@ export const AllReviewItem = ({ review }) => {
           alt="Paella dish"
         />
         <CardContent>
-          <Typography variant="body2" color="text.secondary">
+          <Typography
+            variant="body2"
+            color="text.secondary"
+            className="truncate-3-lines"
+          >
             {review.content}
           </Typography>
         </CardContent>
@@ -185,6 +214,7 @@ export const AllReviewItem = ({ review }) => {
           </CardContent>
         </Collapse>
       </Card>
+      <Alert {...alertState} handleClose={handleClose} />
     </LoadingWrapper>
   );
 };

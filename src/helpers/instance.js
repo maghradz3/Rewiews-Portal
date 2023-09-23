@@ -32,6 +32,9 @@ axiosInstance.interceptors.response.use(
         .then(({ data }) => {
           localStorage.setItem("token", data.token);
           return axiosInstance(origianlRequest);
+        })
+        .catch((error) => {
+          console.log(error);
         });
     }
   }

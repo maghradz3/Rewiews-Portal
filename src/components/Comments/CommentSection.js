@@ -1,12 +1,14 @@
 import React from "react";
 import { FcEmptyTrash } from "react-icons/fc";
-import { Button } from "../../atoms";
+import { Alert, Button } from "../../atoms";
 import { useDispatch } from "react-redux";
 import { deleteCommentToReview } from "../../redux/slice";
-import { useReview, useTheme } from "../../hooks";
+import { useTheme, useAlert, useUser } from "../../hooks";
 
 export const CommentSection = ({ comment, users, reviewId }) => {
   const { theme } = useTheme();
+  const { alertState, handleClose, showAlert } = useAlert();
+  const { userInfo } = useUser();
 
   const txtColor = theme !== "dark" ? "text-[#BD9696]" : "text-[#1a242f]";
 
@@ -32,7 +34,17 @@ export const CommentSection = ({ comment, users, reviewId }) => {
         commentId: comment._id,
         reviewId: reviewId,
       })
-    );
+    )
+      .unwrap()
+      .catch((error) => {
+        const { message } = error;
+        const userMessage = userInfo
+          ? `This is not your comment!`
+          : "You need to be logged in to delete comments!";
+        const errorMessage = `${message} ${userMessage}`;
+        console.log(errorMessage);
+        showAlert("error", errorMessage);
+      });
   };
 
   return (
@@ -49,6 +61,7 @@ export const CommentSection = ({ comment, users, reviewId }) => {
           <Button onClick={deleteCommentHandler}>
             <FcEmptyTrash className="cursor-pointer text-xl hover:text-2xl ease-in duration-300 " />
           </Button>
+          <Alert {...alertState} handleClose={handleClose} />
         </div>
       </div>
     </div>

@@ -1,15 +1,16 @@
-import { Box, MenuItem } from "@mui/material";
+import { Box } from "@mui/material";
 import React, { useState } from "react";
 import { Button, Input } from "../../atoms";
 import { generateReviewsFormValues } from "./generateReviewsFormValue";
 import { useDispatch } from "react-redux";
-import { useForm } from "../../hooks";
+import { useForm, useAlert } from "../../hooks";
 import { uploadReview } from "../../redux/slice";
 import { useUser, useReview } from "../../hooks";
 import FileBase64 from "react-file-base64";
-import { TextareaAutosize } from "@mui/material";
+
 import { useNavigate } from "react-router";
 import { useEffect } from "react";
+import { Alert } from "../../atoms";
 
 export const AddReviewForm = () => {
   const [image, setImage] = useState("");
@@ -19,6 +20,7 @@ export const AddReviewForm = () => {
     setFormValues: setReviewFormValues,
   } = useForm(generateReviewsFormValues());
   const { userInfo } = useUser();
+  const { showAlert, alertState, handleClose } = useAlert();
   const { selectedReview } = useReview();
 
   const dispatch = useDispatch();
@@ -60,8 +62,10 @@ export const AddReviewForm = () => {
       .then(() => {
         navigate("/");
       })
-      .catch((err) => {
-        console.log(err);
+      .catch((error) => {
+        const { message } = error;
+        const errorMessage = `${message} Some required parts are missing!`;
+        showAlert("error", errorMessage);
       });
   };
 
@@ -143,6 +147,7 @@ export const AddReviewForm = () => {
         />
       </label>
       <Button onClick={onSubmit}>Add Review</Button>
+      <Alert {...alertState} handleClose={handleClose} />
     </Box>
   );
 };

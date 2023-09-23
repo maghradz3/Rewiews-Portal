@@ -12,7 +12,7 @@ export const authenticatedUser = createAsyncThunk(
 
       return data;
     } catch (error) {
-      return rejectWithValue(error?.response?.data);
+      return rejectWithValue(error?.response?.data?.message);
     }
   }
 );
@@ -25,7 +25,7 @@ export const getAllUsers = createAsyncThunk(
 
       return data;
     } catch (error) {
-      return rejectWithValue(error?.response?.data);
+      return rejectWithValue(error?.response?.data?.message);
     }
   }
 );
@@ -38,7 +38,7 @@ export const deleteUser = createAsyncThunk(
       dispatch(getAllUsers());
       return data;
     } catch (error) {
-      rejectWithValue(error?.response?.data);
+      rejectWithValue(error?.response?.data?.message);
     }
   }
 );
@@ -69,7 +69,6 @@ const userSlice = createSlice({
     });
     builder.addCase(authenticatedUser.rejected, (state, action) => {
       state.loading = false;
-      state.error = action.payload;
     });
     builder.addCase(getAllUsers.pending, (state, action) => {
       state.loading = true;
@@ -80,7 +79,6 @@ const userSlice = createSlice({
     });
     builder.addCase(getAllUsers.rejected, (state, action) => {
       state.loading = false;
-      state.error = action.payload;
     });
   },
 });

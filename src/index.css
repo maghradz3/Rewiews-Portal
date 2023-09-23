@@ -16,6 +16,13 @@ html {
   display: none;
 }
 
+.truncate-3-lines {
+  @apply overflow-hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4
+}
+
 /* body {
   margin: 0;
   background-color: #3f3f3f;

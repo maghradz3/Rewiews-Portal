@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import { UserIcon } from "./UserIcon";
-import { Button } from "../../atoms";
+import { Button, ThemeBtn } from "../../atoms";
 import { useNavigate } from "react-router";
 import { SearchBar } from "../Home/SearchBar";
 import { useEffect } from "react";
@@ -84,7 +84,7 @@ export const Header = () => {
             className="btn btn-ghost text-xs sm:text-sm md:text-base"
             onClick={() => dispatch(toggleTheme())}
           >
-            <MdDarkMode className="text-xl" />
+            <ThemeBtn />
           </button>
         </div>
       </div>

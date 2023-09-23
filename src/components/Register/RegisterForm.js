@@ -1,11 +1,11 @@
 import { Box } from "@mui/material";
 import React, { useState } from "react";
-import { Button, Input } from "../../atoms";
+import { Alert, Button, Input } from "../../atoms";
 import { generateRegisterFormValues } from "./generateRegisterFormValues";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import { authenticatedUser } from "../../redux/slice";
-import { useForm } from "../../hooks";
+import { useForm, useAlert } from "../../hooks";
 import FileBase64 from "react-file-base64";
 
 export const RegisterForm = () => {
@@ -13,6 +13,7 @@ export const RegisterForm = () => {
     generateRegisterFormValues()
   );
   const [image, setImage] = useState("");
+  const { alertState, handleClose, showAlert } = useAlert();
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -33,8 +34,10 @@ export const RegisterForm = () => {
       .then(() => {
         navigate("/");
       })
-      .catch((err) => {
-        console.log(err);
+      .catch((error) => {
+        const { message } = error;
+        const errorMessage = `${message} This email is already taken!`;
+        showAlert("error", errorMessage);
       });
   };
 
@@ -77,6 +80,7 @@ export const RegisterForm = () => {
         />
       </label>
       <Button onClick={onSubmit}>Register</Button>
+      <Alert {...alertState} handleClose={handleClose} />
     </Box>
   );
 };
