@@ -120,7 +120,7 @@ export const AddReviewForm = () => {
           value={reviewFormValues.category.value}
           error={reviewFormValues.category.error}
         >
-          <option disabled selected className="text-black" value="">
+          <option defaultValue className="text-black" value="">
             Select Category
           </option>
           <option value="Movies">Movies</option>

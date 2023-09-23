@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import { UserIcon } from "./UserIcon";
-import { Button, ThemeBtn } from "../../atoms";
+import { ThemeBtn } from "../../atoms";
 import { useNavigate } from "react-router";
 import { SearchBar } from "../Home/SearchBar";
 import { useEffect } from "react";
@@ -10,7 +10,7 @@ import { getAllReviews } from "../../redux/slice";
 import { FcHome } from "react-icons/fc";
 import { useTheme, useUser } from "../../hooks";
 import { toggleTheme } from "../../redux/slice";
-import { MdDarkMode } from "react-icons/md";
+
 import { isUserAdmin } from "../../helpers";
 
 export const Header = () => {
