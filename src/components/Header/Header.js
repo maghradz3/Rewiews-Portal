@@ -44,7 +44,7 @@ export const Header = () => {
   }, [theme]);
 
   return (
-    <div className="navbar bg-base-100 px-4 xs:pl-1 md:px-8 lg:px-8">
+    <div className="navbar bg-base-100 px-4 xs:pl-1 md:px-8 lg:px-8 flex">
       <div className="flex-1 flex items-center justify-start">
         <a
           onClick={() => navigate("/")}
@@ -53,41 +53,16 @@ export const Header = () => {
           <FcHome className="text-4xl" />
         </a>
       </div>
-      <Translate />
-      <div className="flex-none gap-2">
+
+      <div className="flex-1 flex items-center justify-center">
         <div className="form-control">
           <SearchBar />
         </div>
       </div>
-      <div className="flex-1 flex items-center justify-center gap-2 md:gap-4">
-        <ul className="menu menu-vertical lg:menu-horizontal bg-base-200  rounded-box  ">
-          {userInfo && (
-            <>
-              <li>
-                <a onClick={moveToAuthorReviewsHandler}>{t("my review")}</a>
-              </li>
-              <li>
-                <a onClick={moveToUploadHandler}>{t("write Review")}</a>
-              </li>
-            </>
-          )}
-          {isUserAdmin(userInfo) && (
-            <li>
-              <a onClick={moveToAdminPanelHandler}>{t("admin panel")}</a>
-            </li>
-          )}
-        </ul>
 
-        <div className="flex items-center justify-end">
-          <button
-            className="btn btn-ghost text-xs sm:text-sm md:text-base"
-            onClick={() => dispatch(toggleTheme())}
-          >
-            <ThemeBtn />
-          </button>
-        </div>
+      <div className=" flex-1 flex items-center justify-end">
+        <UserIcon />
       </div>
-      <UserIcon />
     </div>
   );
 };

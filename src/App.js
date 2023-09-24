@@ -1,6 +1,6 @@
 import { Grid, styled } from "@mui/material";
 import { RouteComponent } from "./Routes";
-import { Header } from "./components/Header";
+import { Header, NavBar2 } from "./components/Header";
 import { useTheme } from "./hooks";
 
 // const StyledGrid = styled(Grid)(() => ({
@@ -20,6 +20,7 @@ function App() {
   return (
     <Grid>
       <Header />
+      <NavBar2 />
       <Grid className={`${bgColor} pt-5  `} item>
         <RouteComponent />
       </Grid>
