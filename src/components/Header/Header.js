@@ -12,9 +12,12 @@ import { useTheme, useUser } from "../../hooks";
 import { toggleTheme } from "../../redux/slice";
 
 import { isUserAdmin } from "../../helpers";
+import { Translate } from "../Translation";
+import { useTranslation } from "react-i18next";
 
 export const Header = () => {
   const navigate = useNavigate();
+  const { t, i18n } = useTranslation();
 
   const dispatch = useDispatch();
   const { userInfo } = useUser();
@@ -47,14 +50,10 @@ export const Header = () => {
           onClick={() => navigate("/")}
           className="btn btn-ghost btn-gray-400 normal-case text-xl"
         >
-          {/* <button
-            className="text-xs sm:text-sm md:text-base"
-            onClick={() => navigate("/")}
-          > */}
           <FcHome className="text-4xl" />
-          {/* </button> */}
         </a>
       </div>
+      <Translate />
       <div className="flex-none gap-2">
         <div className="form-control">
           <SearchBar />
@@ -65,16 +64,16 @@ export const Header = () => {
           {userInfo && (
             <>
               <li>
-                <a onClick={moveToAuthorReviewsHandler}>MY REVIEWS</a>
+                <a onClick={moveToAuthorReviewsHandler}>{t("my review")}</a>
               </li>
               <li>
-                <a onClick={moveToUploadHandler}>WRITE A REVIEW</a>
+                <a onClick={moveToUploadHandler}>{t("write Review")}</a>
               </li>
             </>
           )}
           {isUserAdmin(userInfo) && (
             <li>
-              <a onClick={moveToAdminPanelHandler}>ADMIN PANEL</a>
+              <a onClick={moveToAdminPanelHandler}>{t("admin panel")}</a>
             </li>
           )}
         </ul>

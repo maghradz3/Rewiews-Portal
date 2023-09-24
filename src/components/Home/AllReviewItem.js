@@ -33,6 +33,7 @@ import { Comment } from "../Comments";
 import { useNavigate } from "react-router";
 import { isUserAdmin } from "../../helpers";
 import { Alert, LoadingWrapper } from "../../atoms";
+import { useTranslation } from "react-i18next";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -56,6 +57,7 @@ export const AllReviewItem = ({ review }) => {
   const { title } = review;
   const [expanded, setExpanded] = useState(false);
   const [anchor, setAnchor] = useState(null);
+  const { t, i18n } = useTranslation();
 
   const { alertState, handleClose, showAlert } = useAlert();
 
@@ -134,7 +136,9 @@ export const AllReviewItem = ({ review }) => {
                   {buttonInfo ? (
                     <>
                       <MenuItem>
-                        <Button onClick={deleteReviewHandler}>Delete</Button>
+                        <Button onClick={deleteReviewHandler}>
+                          {t("delete")}
+                        </Button>
                       </MenuItem>
                       <MenuItem>
                         <Button
@@ -143,13 +147,13 @@ export const AllReviewItem = ({ review }) => {
                             navigate(`/${title}/edit`);
                           }}
                         >
-                          Edit
+                          {t("edit")}
                         </Button>
                       </MenuItem>
                     </>
                   ) : (
                     <MUIAlert severity="error">
-                      This is not your Review
+                      {t("this is not your review")}
                     </MUIAlert>
                   )}
                 </StyledBox>
@@ -207,7 +211,7 @@ export const AllReviewItem = ({ review }) => {
         <Collapse in={expanded} timeout="auto" unmountOnExit>
           <CardContent className="flex flex-col">
             <Typography className="self-center" paragraph>
-              Comments
+              {t("comment")}
             </Typography>
 
             <Comment reviewId={review._id} comments={review.comments} />

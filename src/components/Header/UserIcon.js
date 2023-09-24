@@ -7,11 +7,14 @@ import { Button } from "../../atoms";
 import { logoutUser } from "../../redux/slice";
 import { getUserInitials } from "../../helpers";
 import { BsFillPersonPlusFill } from "react-icons/bs";
+import { useTranslation } from "react-i18next";
 
 export const UserIcon = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { userInfo } = useUser();
+
+  const { t, i18n } = useTranslation();
 
   return (
     <div className="dropdown dropdown-end">
@@ -35,15 +38,15 @@ export const UserIcon = () => {
           <>
             <li>
               <Button onClick={() => navigate("/register")}>
-                Sign Up
+                {t("register")}
                 <span className="badge">New</span>
               </Button>
             </li>
             <li>
-              <Button onClick={() => navigate("/login")}>Log In</Button>
+              <Button onClick={() => navigate("/login")}>{t("LogIn")}</Button>
             </li>
             <li>
-              <Button onClick={() => navigate("/")}> Menu</Button>
+              <Button onClick={() => navigate("/")}>{t("menu")}</Button>
             </li>
           </>
         ) : (
@@ -56,7 +59,7 @@ export const UserIcon = () => {
                 }}
               >
                 {" "}
-                Log out
+                {t("logout")}
               </Button>
             </li>
           </>

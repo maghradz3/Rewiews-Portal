@@ -1,6 +1,6 @@
 import { Grid, styled } from "@mui/material";
 import { RouteComponent } from "./Routes";
-import { Header } from "./components";
+import { Header } from "./components/Header";
 import { useTheme } from "./hooks";
 
 // const StyledGrid = styled(Grid)(() => ({

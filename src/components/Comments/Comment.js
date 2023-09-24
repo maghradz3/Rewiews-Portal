@@ -6,9 +6,11 @@ import { Button } from "../../atoms";
 import { Box } from "@mui/material";
 import { CommentSection } from "./CommentSection";
 import { useUser } from "../../hooks";
+import { useTranslation } from "react-i18next";
 
 export const Comment = ({ reviewId, comments }) => {
   const [inputValue, setInputValue] = useState("");
+  const { t, i18n } = useTranslation();
   const onChangeHandler = (e) => {
     setInputValue(e.target.value);
   };
@@ -38,7 +40,7 @@ export const Comment = ({ reviewId, comments }) => {
             name="search"
           />
           <Button onClick={onSubmitHandler} className="self-end">
-            Add Comment
+            {t("addcomment")}
           </Button>
         </>
       )}

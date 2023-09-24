@@ -7,11 +7,13 @@ import { useNavigate } from "react-router";
 import { authenticatedUser } from "../../redux/slice";
 import { useForm, useAlert } from "../../hooks";
 import FileBase64 from "react-file-base64";
+import { useTranslation } from "react-i18next";
 
 export const RegisterForm = () => {
   const { formValues: registerFormValues, onFormChange } = useForm(
     generateRegisterFormValues()
   );
+  const { t, i18n } = useTranslation();
   const [image, setImage] = useState("");
   const { alertState, handleClose, showAlert } = useAlert();
 
@@ -45,41 +47,41 @@ export const RegisterForm = () => {
     <Box className="flex flex-col items-center justify-center gap-4 p-6 md:p-10 bg-gray-200 dark:bg-gray-800 rounded-lg max-w-md mx-auto mt-10 shadow-lg">
       <Input
         name="firstName"
-        label="firstName"
+        label={t("firstName")}
         value={registerFormValues.firstName.value}
         error={registerFormValues.firstName.error}
         onChange={onFormChange}
       />
       <Input
         name="lastName"
-        label="lastName"
+        label={t("lastName")}
         value={registerFormValues.lastName.value}
         error={registerFormValues.lastName.error}
         onChange={onFormChange}
       />
       <Input
         name="email"
-        label="email"
+        label={t("email")}
         value={registerFormValues.email.value}
         error={registerFormValues.email.error}
         onChange={onFormChange}
       />
       <Input
         name="password"
-        label="password"
+        label={t("password")}
         value={registerFormValues.password.value}
         error={registerFormValues.password.error}
         onChange={onFormChange}
       />
       <label className="mt-4 text-gray-300 cursor-pointer transition duration-500 ease-in-out inline-block text-center p-2 w-full rounded-md border border-black hover:bg-blue-500 hover:text-white cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
-        <span>Upload Image</span>
+        <span>{t("uploadimage")}</span>
         <FileBase64
           type="file"
           multiple={false}
           onDone={({ base64 }) => setImage(base64)}
         />
       </label>
-      <Button onClick={onSubmit}>Register</Button>
+      <Button onClick={onSubmit}>{t("register")}</Button>
       <Alert {...alertState} handleClose={handleClose} />
     </Box>
   );

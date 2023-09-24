@@ -5,9 +5,11 @@ import { useReview } from "../../hooks";
 import { useNavigate } from "react-router-dom";
 
 import { getSingleREview } from "../../redux/slice";
+import { useTranslation } from "react-i18next";
 
 export const SearchBar = () => {
   const [query, setQuery] = useState("");
+  const { t, i18n } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
   const { loading, searchReviews: searchRev } = useReview();
@@ -44,7 +46,7 @@ export const SearchBar = () => {
           onChange={(e) => setQuery(e.target.value)}
           onKeyUp={handleSearch}
           type="text"
-          placeholder="Search"
+          placeholder={t("search")}
           className="input input-bordered w-24 md:w-auto transition-shadow focus:ring-2 focus:ring-indigo-400 focus:outline-none"
         />
       </div>
