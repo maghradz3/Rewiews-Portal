@@ -1,3 +1,4 @@
+import { use } from "i18next";
 import { useSelector } from "react-redux";
 
 export const useReview = () => {
@@ -8,6 +9,7 @@ export const useReview = () => {
   const searchReviews = useSelector((state) => state?.reviews?.searchReviews);
   const loading = useSelector((state) => state?.reviews?.loading);
   const error = useSelector((state) => state?.reviews?.error);
+  const reviewTags=useSelector(state=>state.reviews?.tags)
 
   return {
     reviews,
@@ -17,5 +19,6 @@ export const useReview = () => {
     singleReview,
     loading,
     error,
+    reviewTags
   };
 };

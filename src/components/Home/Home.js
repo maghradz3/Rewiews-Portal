@@ -10,6 +10,7 @@ export const Home = () => {
   const dispatch = useDispatch();
 
   const { reviews, loading } = useReview();
+  console.log(reviews);
 
   useEffect(() => {
     dispatch(getAllReviews());

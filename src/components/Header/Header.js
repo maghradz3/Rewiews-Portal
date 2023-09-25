@@ -60,9 +60,8 @@ export const Header = () => {
         </div>
       </div>
 
-      <div className=" flex-1 flex items-center justify-end">
-        <UserIcon />
-      </div>
+      <div className=" flex-1 flex items-center justify-end"></div>
+      <UserIcon />
     </div>
   );
 };

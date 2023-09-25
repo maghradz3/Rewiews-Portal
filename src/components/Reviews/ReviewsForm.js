@@ -11,9 +11,13 @@ import FileBase64 from "react-file-base64";
 import { useNavigate } from "react-router";
 import { useEffect } from "react";
 import { Alert } from "../../atoms";
+import TagsInput from "./TagsInput";
+import { useTranslation } from "react-i18next";
 
 export const AddReviewForm = () => {
   const [image, setImage] = useState("");
+  const [tags, setTags] = useState([]);
+  const { t, i18n } = useTranslation();
   const {
     formValues: reviewFormValues,
     onFormChange,
@@ -25,6 +29,13 @@ export const AddReviewForm = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const addTag = (tag) => {
+    if (!tags.includes(tag)) setTags([...tags, tag]);
+  };
+
+  const removeTag = (tag) => {
+    setTags(tags.filter((t) => t !== tag));
+  };
 
   useEffect(() => {
     if (selectedReview) {
@@ -38,7 +49,7 @@ export const AddReviewForm = () => {
     const artworkName = reviewFormValues.pieceName.value;
     const content = reviewFormValues.content.value;
     const category = reviewFormValues.category.value;
-    const tags = reviewFormValues.tags.value;
+    // const tags = reviewFormValues.tags.value;
     const rating = reviewFormValues.rating.value;
     const textarrea = reviewFormValues.textarrea.value;
 
@@ -73,28 +84,29 @@ export const AddReviewForm = () => {
     <Box className="flex flex-col items-center justify-center gap-4 p-6 md:p-10 bg-gray-200 dark:bg-gray-800 rounded-lg max-w-md mx-auto mt-10 shadow-lg">
       <Input
         name="title"
-        label="Title"
+        label={t("title")}
         value={reviewFormValues.title.value}
         error={reviewFormValues.title.error}
         onChange={onFormChange}
       />
       <Input
         name="pieceName"
-        label="Artwork Name"
+        label={t("artwork")}
         value={reviewFormValues.pieceName.value}
         error={reviewFormValues.pieceName.error}
         onChange={onFormChange}
       />
-      <Input
+      {/* <Input
         name="tags"
         label="Tags"
         placeholder="Use comma to separate"
         value={reviewFormValues.tags.value}
         onChange={onFormChange}
-      />
+      /> */}
+
       <Input
         name="content"
-        label="Content"
+        label={t("content")}
         value={reviewFormValues.content.value}
         error={reviewFormValues.content.error}
         onChange={onFormChange}
@@ -104,7 +116,7 @@ export const AddReviewForm = () => {
 
       <Input
         name="rating"
-        label="Rating"
+        label={t("rating")}
         type="number"
         min="0"
         max="10"
@@ -121,32 +133,33 @@ export const AddReviewForm = () => {
           error={reviewFormValues.category.error}
         >
           <option defaultValue className="text-black" value="">
-            Select Category
+            {t("selectCategory")}
           </option>
-          <option value="Movies">Movies</option>
-          <option value="Books">Books</option>
-          <option value="Games">Games</option>
+          <option value="Movies">{t("movies")}</option>
+          <option value="Books">{t("books")}</option>
+          <option value="Games">{t("games")}</option>
         </select>
       </div>
 
       <textarea
         className="textarea textarea-info"
-        placeholder="Deep Description"
+        placeholder={t("deepDescription")}
         name="textarrea"
         value={reviewFormValues.textarrea.value}
         onChange={onFormChange}
         //   minRows={3}
       />
+      <TagsInput tags={tags} addTag={addTag} removeTag={removeTag} />
 
       <label className="mt-4 text-gray-300 cursor-pointer transition duration-500 ease-in-out inline-block text-center p-2 w-full rounded-md border border-black hover:bg-blue-500 hover:text-white cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
-        <span>Upload Image</span>
+        <span>{t("uploadimage")}</span>
         <FileBase64
           type="file"
           multiple={false}
           onDone={({ base64 }) => setImage(base64)}
         />
       </label>
-      <Button onClick={onSubmit}>Add Review</Button>
+      <Button onClick={onSubmit}>{t("add Review")}</Button>
       <Alert {...alertState} handleClose={handleClose} />
     </Box>
   );

@@ -18,7 +18,7 @@
   "title": "Title",
   "description": "Description",
   "artwork": "Artwork",
-  "tags": "Tags",
+  "tags": "Add review Tags",
   "content": "Content",
   "rating": "Rating",
   "selectCategory": "Select Category",
@@ -28,5 +28,8 @@
   "this is my review": "This is my review",
   "comment": "Comment",
   "register": "Register",
-  "uploadimage": "Upload Image"
+  "uploadimage": "Upload Image",
+  "movies": "Movies",
+  "books": "Books",
+  "games": "Games"
 }

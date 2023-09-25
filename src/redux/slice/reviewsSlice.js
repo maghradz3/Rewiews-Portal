@@ -134,6 +134,7 @@ const reviewsSlice = createSlice({
     searchReviews: [],
     singleReview: null,
     reviews: [],
+    tags: [],
   },
   reducers: {
     setSelectedReview: (state, action) => {
@@ -157,6 +158,9 @@ const reviewsSlice = createSlice({
     builder.addCase(getAllReviews.fulfilled, (state, action) => {
       state.loading = false;
       state.reviews = action.payload;
+      state.tags = action?.payload
+        .map((review) => review?.tags || [])
+        .reduce((acc, tagsArray) => [...acc, ...tagsArray], []);
     });
     builder.addCase(getAllReviews.rejected, (state, action) => {
       state.loading = false;
