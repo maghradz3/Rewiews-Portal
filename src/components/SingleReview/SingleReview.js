@@ -7,7 +7,6 @@ import { useTheme } from "../../hooks";
 export const SingleReview = () => {
   const { singleReview, loading } = useReview();
   const { theme } = useTheme();
-  console.log(theme);
 
   const bgColor = theme === "dark" ? "bg-[#1a242f]" : "bg-[#F0F0F0]";
 

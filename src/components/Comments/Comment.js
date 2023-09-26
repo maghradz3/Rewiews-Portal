@@ -14,7 +14,6 @@ export const Comment = ({ reviewId, comments }) => {
   const onChangeHandler = (e) => {
     setInputValue(e.target.value);
   };
-  console.log(comments);
 
   const dispatch = useDispatch();
 

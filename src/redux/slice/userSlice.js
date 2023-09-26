@@ -43,6 +43,47 @@ export const deleteUser = createAsyncThunk(
   }
 );
 
+export const blockUser = createAsyncThunk(
+  "user/blockUser",
+  async (id, { rejectWithValue, dispatch }) => {
+    try {
+      const { data } = await axiosInstance.put(`/user/users/${id}/block`);
+
+      dispatch(getAllUsers());
+      return data;
+    } catch (error) {
+      return rejectWithValue("something went wrong");
+    }
+  }
+);
+
+export const unBlockUser = createAsyncThunk(
+  "user/unBlockUser",
+  async (id, { rejectWithValue, dispatch }) => {
+    try {
+      const { data } = await axiosInstance.put(`/user/users/${id}/unblock`);
+
+      dispatch(getAllUsers());
+      return data;
+    } catch (error) {
+      return rejectWithValue("something went wrong");
+    }
+  }
+);
+export const makeAdmin = createAsyncThunk(
+  "user/makeAdmin",
+  async (id, { rejectWithValue, dispatch }) => {
+    try {
+      const { data } = await axiosInstance.put(`/user/users/${id}/admin`);
+
+      dispatch(getAllUsers());
+      return data;
+    } catch (error) {
+      return rejectWithValue("something went wrong");
+    }
+  }
+);
+
 const userSlice = createSlice({
   name: "user",
   initialState: {
@@ -79,6 +120,12 @@ const userSlice = createSlice({
     });
     builder.addCase(getAllUsers.rejected, (state, action) => {
       state.loading = false;
+    });
+    builder.addCase(blockUser.pending, (state, action) => {
+      state.loading = true;
+    });
+    builder.addCase(unBlockUser.pending, (state, action) => {
+      state.loading = true;
     });
   },
 });

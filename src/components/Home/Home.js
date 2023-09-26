@@ -22,7 +22,7 @@ export const Home = () => {
   const sortedReviews = [...(reviews || [])].sort((a, b) => {
     const [type, order] = sortOrder.split("h");
     const isAsc = order === "Asc";
-    console.log(type, order);
+  
 
     if (type === "likes") {
       const aLength = a.likes.length;

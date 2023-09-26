@@ -14,7 +14,7 @@ import { useTheme } from "./hooks";
 
 function App() {
   const { theme } = useTheme();
-  console.log(theme);
+
   const bgColor = theme === "dark" ? "bg-[#1a242f]" : "bg-[#F0F0F0]";
 
   return (

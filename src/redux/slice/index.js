@@ -4,6 +4,9 @@ export {
   logoutUser,
   getAllUsers,
   deleteUser,
+  blockUser,
+  unBlockUser,
+  makeAdmin,
 } from "./userSlice";
 export {
   reviewsReducer,

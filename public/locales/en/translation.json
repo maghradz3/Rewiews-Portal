@@ -36,5 +36,11 @@
   "ratingHigestFirst": "Rating - Higest First",
   "ratingLowestFirst": "Rating - Lowest First",
   "likesHigestFirst": "Likes - Higest First",
-  "likesLowestFirst": "Likes - Lowest First"
+  "likesLowestFirst": "Likes - Lowest First",
+  "role": "Role",
+  "status": "Status",
+  "deleteProfile": "Delete Profile",
+  "block": "Block",
+  "unblock": "Unblock",
+  "makeAdmin": "Make Admin"
 }
