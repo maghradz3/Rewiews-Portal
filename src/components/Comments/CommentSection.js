@@ -9,6 +9,7 @@ export const CommentSection = ({ comment, users, reviewId }) => {
   const { theme } = useTheme();
   const { alertState, handleClose, showAlert } = useAlert();
   const { userInfo } = useUser();
+  console.log(users);
 
   const txtColor = theme !== "dark" ? "text-[#BD9696]" : "text-[#1a242f]";
 

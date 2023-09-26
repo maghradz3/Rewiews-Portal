@@ -31,5 +31,10 @@
   "uploadimage": "Upload Image",
   "movies": "Movies",
   "books": "Books",
-  "games": "Games"
+  "games": "Games",
+  "sortBy": "Sort By",
+  "ratingHigestFirst": "Rating - Higest First",
+  "ratingLowestFirst": "Rating - Lowest First",
+  "likesHigestFirst": "Likes - Higest First",
+  "likesLowestFirst": "Likes - Lowest First"
 }

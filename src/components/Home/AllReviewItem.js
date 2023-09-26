@@ -100,7 +100,8 @@ export const AllReviewItem = ({ review }) => {
 
   const buttonInfo =
     isUserAdmin(userInfo) || review?.author?._id === userInfo?._id;
-  console.log(buttonInfo);
+
+  console.log(review.likes);
 
   return (
     <LoadingWrapper isLoading={loading}>
