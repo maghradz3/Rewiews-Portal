@@ -142,17 +142,17 @@ const reviewsSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(uploadReview.pending, (state, action) => {
+    builder.addCase(uploadReview.pending, (state) => {
       state.loading = true;
     });
-    builder.addCase(uploadReview.fulfilled, (state, action) => {
+    builder.addCase(uploadReview.fulfilled, (state) => {
       state.loading = false;
     });
     builder.addCase(uploadReview.rejected, (state, action) => {
       state.loading = false;
       state.error = action.payload;
     });
-    builder.addCase(getAllReviews.pending, (state, action) => {
+    builder.addCase(getAllReviews.pending, (state) => {
       state.loading = true;
     });
     builder.addCase(getAllReviews.fulfilled, (state, action) => {
@@ -166,32 +166,31 @@ const reviewsSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     });
-    builder.addCase(getSingleREview.pending, (state, action) => {
+    builder.addCase(getSingleREview.pending, (state) => {
       state.loading = true;
     });
     builder.addCase(getSingleREview.fulfilled, (state, action) => {
       state.loading = false;
       state.singleReview = action.payload;
     });
-    builder.addCase(getSingleREview.rejected, (state, a) => {
+    builder.addCase(getSingleREview.rejected, (state) => {
       state.loading = false;
     });
-    builder.addCase(deleteReview.rejected, (state, action) => {
+    builder.addCase(deleteReview.rejected, (state) => {
       state.loading = false;
     });
-    builder.addCase(deleteCommentToReview.rejected, (state, action) => {
+    builder.addCase(deleteCommentToReview.rejected, (state) => {
       state.loading = false;
     });
-    builder.addCase(searchReviews.pending, (state, action) => {
+    builder.addCase(searchReviews.pending, (state) => {
       state.loading = true;
     });
     builder.addCase(searchReviews.fulfilled, (state, action) => {
       state.loading = false;
       state.searchReviews = action.payload;
     });
-    builder.addCase(searchReviews.rejected, (state, action) => {
+    builder.addCase(searchReviews.rejected, (state) => {
       state.loading = false;
-      state.error = action.payload;
     });
   },
 });

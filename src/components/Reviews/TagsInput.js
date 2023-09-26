@@ -24,7 +24,6 @@ const TagsInput = ({ tags, addTag, removeTag }) => {
   const onChangeHandler = (e) => {
     setInput(e.target.value);
   };
-  console.log(input);
 
   const matchedTags = reviewTags.filter((tag) => input === tag);
 
