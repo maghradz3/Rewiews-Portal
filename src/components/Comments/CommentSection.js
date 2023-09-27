@@ -12,13 +12,14 @@ export const CommentSection = ({ comment, users, reviewId }) => {
 
   const txtColor = theme !== "dark" ? "text-[#BD9696]" : "text-[#1a242f]";
 
-  const userInit = users.filter((user) => user._id === comment.user)[0];
+  const userInit = users?.filter((user) => user._id === comment.user)[0];
+
   const userInitials =
-    userInit.firstName.charAt(0).toUpperCase() +
-    userInit.firstName.slice(1) +
+    userInit?.firstName?.charAt(0).toUpperCase() +
+    userInit?.firstName?.slice(1) +
     " " +
-    userInit.lastName.charAt(0).toUpperCase() +
-    userInit.lastName.slice(1);
+    userInit?.lastName?.charAt(0).toUpperCase() +
+    userInit?.lastName?.slice(1);
 
   const dateFormatHandler = (date) => {
     const datePart = date.split("T")[0];
