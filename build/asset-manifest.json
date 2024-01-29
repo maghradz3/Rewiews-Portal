@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/Rewiews-Portal/static/css/main.f2fddae5.css",
+    "main.js": "/Rewiews-Portal/static/js/main.d4dd4685.js",
+    "index.html": "/Rewiews-Portal/index.html",
+    "static/media/getFetch.cjs": "/Rewiews-Portal/static/media/getFetch.40f37ddea2378391108f.cjs",
+    "main.f2fddae5.css.map": "/Rewiews-Portal/static/css/main.f2fddae5.css.map",
+    "main.d4dd4685.js.map": "/Rewiews-Portal/static/js/main.d4dd4685.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f2fddae5.css",
+    "static/js/main.d4dd4685.js"
+  ]
+}
