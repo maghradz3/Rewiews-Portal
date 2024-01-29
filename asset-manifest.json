@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/maghradz3/Rewiews-Portal/tree/master/static/css/main.f2fddae5.css",
+    "main.js": "/maghradz3/Rewiews-Portal/tree/master/static/js/main.0590ef32.js",
+    "index.html": "/maghradz3/Rewiews-Portal/tree/master/index.html",
+    "static/media/getFetch.cjs": "/maghradz3/Rewiews-Portal/tree/master/static/media/getFetch.40f37ddea2378391108f.cjs",
+    "main.f2fddae5.css.map": "/maghradz3/Rewiews-Portal/tree/master/static/css/main.f2fddae5.css.map",
+    "main.0590ef32.js.map": "/maghradz3/Rewiews-Portal/tree/master/static/js/main.0590ef32.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f2fddae5.css",
+    "static/js/main.0590ef32.js"
+  ]
+}
