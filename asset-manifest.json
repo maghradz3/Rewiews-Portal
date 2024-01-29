@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/maghradz3/Rewiews-Portal/tree/master/static/css/main.f2fddae5.css",
-    "main.js": "/maghradz3/Rewiews-Portal/tree/master/static/js/main.0590ef32.js",
-    "index.html": "/maghradz3/Rewiews-Portal/tree/master/index.html",
-    "static/media/getFetch.cjs": "/maghradz3/Rewiews-Portal/tree/master/static/media/getFetch.40f37ddea2378391108f.cjs",
-    "main.f2fddae5.css.map": "/maghradz3/Rewiews-Portal/tree/master/static/css/main.f2fddae5.css.map",
-    "main.0590ef32.js.map": "/maghradz3/Rewiews-Portal/tree/master/static/js/main.0590ef32.js.map"
+    "main.css": "/Rewiews-Portal/static/css/main.f2fddae5.css",
+    "main.js": "/Rewiews-Portal/static/js/main.d4dd4685.js",
+    "index.html": "/Rewiews-Portal/index.html",
+    "static/media/getFetch.cjs": "/Rewiews-Portal/static/media/getFetch.40f37ddea2378391108f.cjs",
+    "main.f2fddae5.css.map": "/Rewiews-Portal/static/css/main.f2fddae5.css.map",
+    "main.d4dd4685.js.map": "/Rewiews-Portal/static/js/main.d4dd4685.js.map"
   },
   "entrypoints": [
     "static/css/main.f2fddae5.css",
-    "static/js/main.0590ef32.js"
+    "static/js/main.d4dd4685.js"
   ]
 }
